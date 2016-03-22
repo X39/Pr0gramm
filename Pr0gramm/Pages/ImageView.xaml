@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="Pr0gramm.Pages.ImageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.Pages"
+    xmlns:uc="using:Pr0gramm.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="Auto">
+
+    <Grid Background="#3F161618" x:Name="MainGrid" PointerPressed="MainGrid_PointerPressed">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*" MinWidth="512"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Background="{StaticResource pr0_grey}" PointerPressed="PointerPressed_EmptyHandled" IsHitTestVisible="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="37"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0">
+                    <Grid Background="{StaticResource pr0_grey}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" MaxHeight="{Binding ActualHeight, ElementName=MainGrid}"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="CurrentImage" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Height="Auto" Margin="0,5,0,15"/>
+                        <StackPanel Grid.Row="1">
+                            <Grid Height="128">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5, 0, 0, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="64"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="32"/>
+                                        </Grid.RowDefinitions>
+                                        <uc:Pr0Button x:Name="btnVoteItemPlus" Text="+" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32"/>
+                                        <uc:Pr0Button x:Name="btnVoteItemMinus" Text="-" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32"/>
+                                    </Grid>
+                                    <Grid Grid.Column="2" VerticalAlignment="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" x:Name="LabelVotes" Text="ERR0R" Foreground="{StaticResource pr0_textColor}" FontSize="20"/>
+                                        <TextBlock Grid.Row="1" x:Name="LabelVotesUp" Text="ERR0R" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="10"/>
+                                        <TextBlock Grid.Row="2" x:Name="LabelVotesDown" Text="ERR0R" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="10" Margin="0, -5, 0, 0"/>
+                                    </Grid>
+                                    <uc:Pr0Button x:Name="btnFavItem" Text="&lt;3" Grid.Column="3" Height="36" Width="36"/>
+                                </Grid>
+                                <ScrollViewer Grid.Column="1" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Width="Auto" HorizontalAlignment="Stretch">
+                                    <VariableSizedWrapGrid x:Name="TagList" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto"/>
+                                </ScrollViewer>
+                            </Grid>
+                            <Grid Margin="32, 0, 32, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBox Grid.Row="0" MinHeight="64" AcceptsReturn="True" Style="{StaticResource pr0TextBox}"/>
+                                <uc:Pr0Button Text="Abschicken" Grid.Row="1" Background="{StaticResource pr0_orange}" Margin="0, 15, 0, 0"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+                <uc:Pr0Button x:Name="BackButton" Grid.Row="1" PathData="{StaticResource Back}" PathHeight="16" PathMargin="0,0,0,0" Text="Zurück" Click="BackButton_Click" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
