@@ -10,37 +10,45 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="32"/>
-                <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="32"/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="32"/>
-                </Grid.RowDefinitions>
-                <uc:Pr0Button x:Name="btnVoteItemPlus" Text="+" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32"/>
-                <uc:Pr0Button x:Name="btnVoteItemMinus" Text="-" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32"/>
+    <Border BorderThickness="2, 0, 0, 2" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="0, 0, 0, 2">
+        <Grid Margin="0, 0, 0, 2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <uc:Pr0Button x:Name="btnVoteItemPlus" PathData="{StaticResource pr0_upVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <uc:Pr0Button x:Name="btnVoteItemMinus" PathData="{StaticResource pr0_downVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="CommentElement" Grid.Row="0" Text="ERR0R" Foreground="{StaticResource pr0_textColor}"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Border Visibility="Visible" x:Name="isOpElement" Background="{StaticResource pr0_orange}" CornerRadius="3" Padding="3,0,3,0" Margin="0,0,5,0">
+                            <TextBlock Text="OP" Foreground="{StaticResource pr0_textColor}"/>
+                        </Border>
+                        <TextBlock x:Name="AuthorElement" Text="USERNAME" Foreground="{StaticResource pr0_textColor}" Height="Auto"/>
+                        <Ellipse x:Name="AuthorRank" Width="5" Height="5" Fill="White" Margin="5,0,5,0"/>
+                        <TextBlock x:Name="Created" Text="DATE" Foreground="{StaticResource pr0_textColor}" Margin="5,0,5,0"/>
+                        <uc:Pr0Button PathData="{StaticResource pr0_reply}" PathHeight="8" PathMargin="0,0,5,0" Text="Antworten" Padding="8,0"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
-            <Grid Grid.Column="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock x:Name="Comment" Grid.Row="0" Text="ERR0R" Foreground="{StaticResource pr0_textColor}"/>
-                <TextBlock x:Name="Author" Grid.Row="1" Text="Foobar" Foreground="{StaticResource pr0_textColor}"/>
-            </Grid>
+            <StackPanel Grid.Row="1" x:Name="ChildrensStack" x:FieldModifier="public" Orientation="Vertical" Margin="3, 4, 0, 0"/>
         </Grid>
-        <Border Grid.Row="1" BorderThickness="3, 0, 0, 0" BorderBrush="{StaticResource pr0_orange}">
-            <StackPanel x:Name="ChildrensStack" x:FieldModifier="public" Orientation="Vertical" Margin="3, 0, 0, 0"/>
-        </Border>
-    </Grid>
+    </Border>
 </UserControl>
