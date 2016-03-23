@@ -41,7 +41,7 @@ namespace Pr0gramm.UI.Pages
                     VariableSizedWrapGrid.SetColumnSpan(tag, (int)tagWidth / 10 + 1);
                 }
 
-                this.LabelVotes.Text = (this.Source.Up + this.Source.Down).ToString();
+                this.LabelVotes.Text = (this.Source.Up - this.Source.Down).ToString();
                 this.LabelVotesUp.Text = "up: " + this.Source.Up;
                 this.LabelVotesDown.Text = "down: " + this.Source.Down;
 
