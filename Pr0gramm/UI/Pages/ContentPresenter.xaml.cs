@@ -21,7 +21,7 @@ namespace Pr0gramm.UI.Pages
         public class ViewSource
         {
             public readonly ViewType viewType;
-            public readonly string username;
+            public readonly string data;
             public readonly int filterMode;
             public readonly bool isSelf;
 
@@ -46,33 +46,33 @@ namespace Pr0gramm.UI.Pages
             public ViewSource(ViewType vt)
             {
                 this.viewType = vt;
-                this.username = "";
+                this.data = "";
                 this.filterMode = 0;
                 this.isSelf = false;
             }
-            public ViewSource(ViewType vt, string username, FilterMode mode = FilterMode.sfw, bool isSelf = false)
+            public ViewSource(ViewType vt, string data, FilterMode mode = FilterMode.sfw, bool isSelf = false)
             {
                 if ((vt == ViewType.UserFavorites || vt == ViewType.UserImages))
                 {
-                    if (string.IsNullOrWhiteSpace(username))
-                        throw new ArgumentException("UserX ViewTypes require a username");
+                    if (string.IsNullOrWhiteSpace(data))
+                        throw new ArgumentException("UserX ViewTypes require a username in data param");
                 }
                 this.viewType = vt;
-                this.username = username;
+                this.data = data;
                 this.filterMode = (int)mode;
                 this.isSelf = isSelf;
             }
-            public ViewSource(ViewType vt, string username, int mode = 0, bool isSelf = false)
+            public ViewSource(ViewType vt, string data, int mode = 0, bool isSelf = false)
             {
                 if ((vt == ViewType.UserFavorites || vt == ViewType.UserImages))
                 {
-                    if (string.IsNullOrWhiteSpace(username))
-                        throw new ArgumentException("UserX ViewTypes require a username");
+                    if (string.IsNullOrWhiteSpace(data))
+                        throw new ArgumentException("UserX ViewTypes require a username in data param");
                     if (mode < 0 || mode > 7)
                         throw new ArgumentException("mode has to be in range 0 - 7");
                 }
                 this.viewType = vt;
-                this.username = username;
+                this.data = data;
                 this.filterMode = mode;
                 this.isSelf = isSelf;
             }
@@ -84,13 +84,13 @@ namespace Pr0gramm.UI.Pages
                     switch (this.viewType)
                     {
                         case ViewType.New:
-                            return "items/get?promoted=0" + "&flags=" + this.filterMode;
+                            return "items/get?promoted=0" + "&flags=" + this.filterMode + (string.IsNullOrWhiteSpace(data) ? "" : "&tags=" + System.Net.WebUtility.UrlEncode(data));
                         case ViewType.Top:
-                            return "items/get?promoted=1" + "&flags=" + this.filterMode;
+                            return "items/get?promoted=1" + "&flags=" + this.filterMode + (string.IsNullOrWhiteSpace(data) ? "" : "&tags=" + System.Net.WebUtility.UrlEncode(data));
                         case ViewType.UserFavorites:
-                            return "items/get?likes=" + this.username + "&flags=" + this.filterMode;
+                            return "items/get?likes=" + System.Net.WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
                         case ViewType.UserImages:
-                            return "items/get?user=" + this.username + "&flags=" + this.filterMode;
+                            return "items/get?user=" + System.Net.WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
                         default:
                             return "";
                     }

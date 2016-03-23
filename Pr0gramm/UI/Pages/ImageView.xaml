@@ -40,14 +40,14 @@
                                         <ColumnDefinition Width="64"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
+                                    <Grid Grid.Column="0" VerticalAlignment="Center">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="20"/>
                                             <RowDefinition Height="5"/>
-                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
-                                        <uc:Pr0Button x:Name="btnVoteItemPlus" Text="+" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32"/>
-                                        <uc:Pr0Button x:Name="btnVoteItemMinus" Text="-" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32"/>
+                                        <uc:Pr0Button x:Name="btnVoteItemPlus" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" PathData="{StaticResource pr0_upVote}" PathHeight="16" PathMargin="2,2,2,2"/>
+                                        <uc:Pr0Button x:Name="btnVoteItemMinus"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" PathData="{StaticResource pr0_downVote}" PathHeight="16" PathMargin="2,2,2,2"/>
                                     </Grid>
                                     <Grid Grid.Column="2" VerticalAlignment="Center">
                                         <Grid.RowDefinitions>
@@ -59,7 +59,7 @@
                                         <TextBlock Grid.Row="1" x:Name="LabelVotesUp" Text="ERR0R" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="10"/>
                                         <TextBlock Grid.Row="2" x:Name="LabelVotesDown" Text="ERR0R" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="10" Margin="0, -5, 0, 0"/>
                                     </Grid>
-                                    <uc:Pr0Button x:Name="btnFavItem" Text="&lt;3" Grid.Column="3" Height="36" Width="36"/>
+                                    <uc:Pr0Button x:Name="btnFavItem" Grid.Column="3" Height="20" Width="20" PathData="{StaticResource pr0_heart}" PathHeight="14" PathMargin="2,2,2,2"/>
                                 </Grid>
                                 <ScrollViewer Grid.Column="1" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Width="Auto" HorizontalAlignment="Stretch">
                                     <VariableSizedWrapGrid x:Name="TagList" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto" ItemWidth="10" MaximumRowsOrColumns="100"/>
