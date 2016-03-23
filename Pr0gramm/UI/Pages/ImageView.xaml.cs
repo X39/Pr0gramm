@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Threading.Tasks;
-
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Pr0gramm.Pages
+namespace Pr0gramm.UI.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -29,22 +18,22 @@ namespace Pr0gramm.Pages
             this.InitializeComponent();
         }
 
-        public pr0.Image Source { get; private set; }
-        public pr0.ItemInfo Info { get; private set; }
+        public API.Image Source { get; private set; }
+        public API.ItemInfo Info { get; private set; }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is pr0.Image)
+            if (e.Parameter is API.Image)
             {
-                this.Source = (pr0.Image)e.Parameter;
-                this.Info = await pr0.ItemInfo.Fetch(this.Source);
+                this.Source = (API.Image)e.Parameter;
+                this.Info = await API.ItemInfo.Fetch(this.Source);
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
                 bi.UriSource = new Uri(Settings.Pr0grammUrl.Image + this.Source.ImagePath, UriKind.Absolute);
                 this.CurrentImage.Source = bi;
 
                 foreach(var it in this.Info.Tags)
                 {
-                    var tag = new UserControls.Tag(it);
+                    var tag = new Controls.Tag(it);
                     tag.Margin = new Thickness(5, 2, 5, 2);
                     this.TagList.Children.Add(tag);
 
@@ -59,7 +48,7 @@ namespace Pr0gramm.Pages
 
                 foreach (var it in this.Info.Comments)
                 {
-                    this.CommentsStackPanel.Children.Add(new UserControls.UserComment(it));
+                    this.CommentsStackPanel.Children.Add(new Controls.UserComment(it));
                 }
             }
             else

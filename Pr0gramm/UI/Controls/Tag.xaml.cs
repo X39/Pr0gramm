@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Pr0gramm.pr0;
+using Pr0gramm.API;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Pr0gramm.UserControls
+namespace Pr0gramm.UI.Controls
 {
     public sealed partial class Tag : UserControl
     {
@@ -40,7 +30,7 @@ namespace Pr0gramm.UserControls
             }
         }
 
-        public Tag(pr0.ItemInfo.Tag tag)
+        public Tag(ItemInfo.Tag tag)
         {
             this.InitializeComponent();
             this.Text = tag.Text;

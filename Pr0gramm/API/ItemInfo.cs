@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 
-namespace Pr0gramm.pr0
+namespace Pr0gramm.API
 {
     public class ItemInfo
     {

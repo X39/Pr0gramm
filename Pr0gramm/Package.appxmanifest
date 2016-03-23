@@ -5,7 +5,7 @@
   <Properties>
     <DisplayName>Pr0gramm</DisplayName>
     <PublisherDisplayName>Marco.Silipo</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\Square200x200Logo.png</Logo>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
@@ -16,7 +16,11 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Pr0gramm.App">
       <uap:VisualElements DisplayName="Pr0gramm" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Pr0gramm" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
+        <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\BadgeLogo.png" />
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png" ShortName="Pr0gramm">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
@@ -27,10 +31,42 @@
             <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
+        <uap:Extension Category="windows.fileOpenPicker">
+          <uap:FileOpenPicker>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.jpg</uap:FileType>
+              <uap:FileType>.png</uap:FileType>
+              <uap:FileType>.gif</uap:FileType>
+              <uap:FileType>.webm</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileOpenPicker>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileSavePicker">
+          <uap:FileSavePicker>
+            <uap:SupportedFileTypes>
+              <uap:SupportsAnyFileType />
+            </uap:SupportedFileTypes>
+          </uap:FileSavePicker>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="pr0gramm.com">
+            <uap:DisplayName>Auf Pr0gramm.com hochladen.</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.jpg</uap:FileType>
+              <uap:FileType>.png</uap:FileType>
+              <uap:FileType>.gif</uap:FileType>
+              <uap:FileType>.webm</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.alarm" />
       </Extensions>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <uap:Capability Name="picturesLibrary" />
+    <uap:Capability Name="videosLibrary" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
 </Package>

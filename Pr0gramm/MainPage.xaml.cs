@@ -25,7 +25,7 @@ namespace Pr0gramm
         public MainPage()
         {
             this.InitializeComponent();
-            this.ContentFrame.Navigate(typeof(Pages.ContentPresenter), new Pages.ContentPresenter.ViewSource(Pages.ContentPresenter.ViewSource.ViewType.New));
+            this.ContentFrame.Navigate(typeof(UI.Pages.ContentPresenter), new UI.Pages.ContentPresenter.ViewSource(UI.Pages.ContentPresenter.ViewSource.ViewType.New));
         }
     }
 }
