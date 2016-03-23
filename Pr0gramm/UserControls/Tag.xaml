@@ -18,7 +18,7 @@
             <ColumnDefinition Width="32"/>
         </Grid.ColumnDefinitions>
         <uc:Pr0Button Grid.Column="0" Text="+" Width="32"/>
-        <TextBlock Grid.Column="1" Text="{Binding Text, ElementName=TagXaml}" Foreground="{StaticResource pr0_textColor}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto"/>
+        <TextBlock x:Name="TextBlockElement" Grid.Column="1" Text="{Binding Text, ElementName=TagXaml}" Foreground="{StaticResource pr0_textColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <uc:Pr0Button Grid.Column="2" Text="-" Width="32"/>
     </Grid>
 </UserControl>

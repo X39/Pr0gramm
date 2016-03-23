@@ -29,11 +29,22 @@ namespace Pr0gramm.UserControls
 
         public ItemInfo.Tag FullTag { get; private set; }
 
+        public double ElementWidth
+        {
+            get
+            {
+                if (this.TextBlockElement.Text != this.Text)
+                    this.TextBlockElement.Text = this.Text;
+                this.TextBlockElement.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                return this.TextBlockElement.DesiredSize.Width + 2 * 32;
+            }
+        }
+
         public Tag(pr0.ItemInfo.Tag tag)
         {
+            this.InitializeComponent();
             this.Text = tag.Text;
             this.FullTag = tag;
-            this.InitializeComponent();
         }
     }
 }
