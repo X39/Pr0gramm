@@ -95,13 +95,13 @@ namespace Pr0gramm.Pages
                     switch (this.viewType)
                     {
                         case ViewType.New:
-                            return "items/get?promoted=0" + "&flags=" + this.filterMode;
+                            return "items/get?promoted=0" + "&flags=" + this.filterMode + (string.IsNullOrWhiteSpace(data) ? "" : "&tags=" + System.Net.WebUtility.UrlEncode(data));
                         case ViewType.Top:
-                            return "items/get?promoted=1" + "&flags=" + this.filterMode;
+                            return "items/get?promoted=1" + "&flags=" + this.filterMode + (string.IsNullOrWhiteSpace(data) ? "" : "&tags=" + System.Net.WebUtility.UrlEncode(data));
                         case ViewType.UserFavorites:
-                            return "items/get?likes=" + this.data + "&flags=" + this.filterMode;
+                            return "items/get?likes=" + System.Net.WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
                         case ViewType.UserImages:
-                            return "items/get?user=" + this.data + "&flags=" + this.filterMode;
+                            return "items/get?user=" + System.Net.WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
                         default:
                             return "";
                     }
