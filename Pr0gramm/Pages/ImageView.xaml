@@ -62,7 +62,7 @@
                                     <uc:Pr0Button x:Name="btnFavItem" Text="&lt;3" Grid.Column="3" Height="36" Width="36"/>
                                 </Grid>
                                 <ScrollViewer Grid.Column="1" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Width="Auto" HorizontalAlignment="Stretch">
-                                    <VariableSizedWrapGrid x:Name="TagList" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto"/>
+                                    <VariableSizedWrapGrid x:Name="TagList" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto" ItemWidth="10" MaximumRowsOrColumns="100"/>
                                 </ScrollViewer>
                             </Grid>
                             <Grid Margin="32, 0, 32, 0">
@@ -70,13 +70,14 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBox Grid.Row="0" MinHeight="64" AcceptsReturn="True" Style="{StaticResource pr0TextBox}"/>
+                                <TextBox  Grid.Row="0" MinHeight="64" AcceptsReturn="True" Style="{StaticResource pr0TextBox}"/>
                                 <uc:Pr0Button Text="Abschicken" Grid.Row="1" Background="{StaticResource pr0_orange}" Margin="0, 15, 0, 0"/>
                             </Grid>
+                            <StackPanel x:Name="CommentsStackPanel"/>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
-                <uc:Pr0Button x:Name="BackButton" Grid.Row="1" PathData="{StaticResource Back}" PathHeight="16" PathMargin="0,0,0,0" Text="Zurück" Click="BackButton_Click" VerticalAlignment="Bottom"/>
+                <uc:Pr0Button x:Name="BackButton" Grid.Row="1" PathData="{StaticResource Back}" PathHeight="16" PathMargin="0,0,0,0" Padding="5" Text="Zurück" Click="BackButton_Click" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Grid>
