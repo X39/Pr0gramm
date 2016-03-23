@@ -33,8 +33,8 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <uc:Pr0Button Text="neu" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0"/>
-                <uc:Pr0Button Text="top" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Margin="0"/>
+                <uc:Pr0Button Text="neu" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
+                <uc:Pr0Button Text="top" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
             </Grid>
             <Grid x:Name="Grid_ControlBar" Grid.Column="2" HorizontalAlignment="Right" Margin="0, 0, 5, 0">
                 <Grid.ColumnDefinitions>
@@ -42,9 +42,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <uc:Pr0Button Text="X39" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0"/>
-                <uc:Pr0Button x:Name="msgButton" PathData="{StaticResource pr0_message}" PathHeight="18" PathMargin="5,5,5,5" Text="0" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch"/>
-                <uc:Pr0Button x:Name="settings" PathData="{StaticResource pr0_settings}" PathHeight="18" PathMargin="5,5,5,5" Text="" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch"/>
+                <uc:Pr0Button Text="X39" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
+                <uc:Pr0Button x:Name="msgButton" PathData="{StaticResource pr0_message}" PathHeight="18" PathMargin="5,5,5,5" Text="0" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4"/>
+                <uc:Pr0Button x:Name="settings" PathData="{StaticResource pr0_settings}" PathHeight="18" PathMargin="5,5,5,5" Text="" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4"/>
             </Grid>
         </Grid>
         <!--
