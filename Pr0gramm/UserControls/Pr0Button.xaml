@@ -10,14 +10,13 @@
     d:DesignWidth="400"
     x:Name="Pr0ButtonXaml">
 
-    <Button Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Text, Mode=OneWay}" Click="Button_Click">
+    <Button Width="Auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Text, Mode=OneWay}" Click="Button_Click" Padding="{Binding Padding, ElementName=Pr0ButtonXaml}">
         <Button.Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
                 <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
                 <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
-                <Setter Property="Padding" Value="8,4,8,4" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
