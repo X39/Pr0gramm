@@ -37,7 +37,7 @@ namespace Pr0gramm.Pages
             if (e.Parameter is pr0.Image)
             {
                 this.Source = (pr0.Image)e.Parameter;
-                this.Info = await pr0.ItemInfo.Fetch(this.Source.Id);
+                this.Info = await pr0.ItemInfo.Fetch(this.Source);
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
                 bi.UriSource = new Uri(Settings.Pr0grammUrl.Image + this.Source.ImagePath, UriKind.Absolute);
                 this.CurrentImage.Source = bi;
@@ -47,11 +47,20 @@ namespace Pr0gramm.Pages
                     var tag = new UserControls.Tag(it);
                     tag.Margin = new Thickness(5, 2, 5, 2);
                     this.TagList.Children.Add(tag);
+
+                    double tagWidth = tag.ElementWidth + tag.Margin.Left + tag.Margin.Right;
+                    VariableSizedWrapGrid.SetColumnSpan(tag, (int)tagWidth / 10 + 1);
                 }
 
                 this.LabelVotes.Text = (this.Source.Up + this.Source.Down).ToString();
                 this.LabelVotesUp.Text = "up: " + this.Source.Up;
                 this.LabelVotesDown.Text = "down: " + this.Source.Down;
+
+
+                foreach (var it in this.Info.Comments)
+                {
+                    this.CommentsStackPanel.Children.Add(new UserControls.UserComment(it));
+                }
             }
             else
             {
