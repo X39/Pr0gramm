@@ -27,26 +27,28 @@ namespace Pr0gramm.pr0
             public List<Comment> Children { get; private set; }
             public string Content { get; private set; }
             public long Confidence { get; private set; }
-            public long Created { get; private set; }
+            public DateTime Created { get; private set; }
             public long Down { get; private set; }
             public long Id { get; private set; }
             public long Mark { get; private set; }
             public long Parent { get; private set; }
-            public string PosterName { get; private set; }
+            public string Author { get; private set; }
             public long Up { get; private set; }
+            public ItemInfo Owner { get; private set; }
 
-            public Comment(asapJson.JsonNode souceNode)
+            public Comment(asapJson.JsonNode souceNode, ItemInfo owner)
             {
                 this.Children = new List<Comment>();
                 this.Id = (long)souceNode.getValue_Object()["id"].getValue_Number();
                 this.Parent = (long)souceNode.getValue_Object()["parent"].getValue_Number();
                 this.Content = souceNode.getValue_Object()["content"].getValue_String();
-                this.Created = (long)souceNode.getValue_Object()["created"].getValue_Number();
+                this.Created = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(souceNode.getValue_Object()["created"].getValue_Number()); ;
                 this.Up = (long)souceNode.getValue_Object()["up"].getValue_Number();
                 this.Down = (long)souceNode.getValue_Object()["down"].getValue_Number();
                 this.Confidence = (long)souceNode.getValue_Object()["confidence"].getValue_Number();
-                this.PosterName = souceNode.getValue_Object()["name"].getValue_String();
+                this.Author = souceNode.getValue_Object()["name"].getValue_String();
                 this.Mark = (long)souceNode.getValue_Object()["mark"].getValue_Number();
+                this.Owner = owner;
             }
 
         }
@@ -56,8 +58,9 @@ namespace Pr0gramm.pr0
         public string Cache { get; private set; }
         public long Rt { get; private set; }
         public long Qc { get; private set; }
+        public Image Owner { get; private set; }
 
-        public ItemInfo(asapJson.JsonNode sourceNode)
+        public ItemInfo(asapJson.JsonNode sourceNode, Image owner)
         {
             this.Tags = new List<Tag>();
             foreach (var node in sourceNode.getValue_Object()["tags"].getValue_Array())
@@ -69,7 +72,7 @@ namespace Pr0gramm.pr0
             var tmpComments = new List<Comment>();
             foreach (var node in sourceNode.getValue_Object()["comments"].getValue_Array())
             {
-                tmpComments.Add(new Comment(node));
+                tmpComments.Add(new Comment(node, this));
             }
             foreach(var it in tmpComments)
             {
@@ -87,11 +90,13 @@ namespace Pr0gramm.pr0
             this.Cache = sourceNode.getValue_Object()["cache"].getValue_String();
             this.Rt = (long)sourceNode.getValue_Object()["rt"].getValue_Number();
             this.Qc = (long)sourceNode.getValue_Object()["qc"].getValue_Number();
+
+            this.Owner = owner;
         }
-        public static async Task<ItemInfo> Fetch(long id)
+        public static async Task<ItemInfo> Fetch(Image img)
         {
             string url = Settings.Pr0grammUrl.Api;
-            url += "items/info?itemId=" + id;
+            url += "items/info?itemId=" + img.Id;
             WebRequest request = WebRequest.Create(url);
             request.Method = "GET";
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -101,7 +106,7 @@ namespace Pr0gramm.pr0
             var response = await request.GetResponseAsync();
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd(), true);
-            return new ItemInfo(responseNode);
+            return new ItemInfo(responseNode, img);
         }
     }
 }
