@@ -93,13 +93,13 @@ namespace Pr0gramm.API
         }
         public static async Task<ItemInfo> Fetch(Image img)
         {
-            string url = Settings.Pr0grammUrl.Api;
+            string url = app.Settings.Pr0grammUrl.Api;
             url += "items/info?itemId=" + img.Id;
             WebRequest request = WebRequest.Create(url);
             request.Method = "GET";
             request.Credentials = CredentialCache.DefaultCredentials;
-            request.Headers["User-Agent"] = Settings.UserAgent;
-            ((HttpWebRequest)request).CookieContainer = Settings.Instance.Cookie;
+            request.Headers["User-Agent"] = app.Settings.UserAgent;
+            ((HttpWebRequest)request).CookieContainer = app.Settings.Instance.Cookie;
 
             var response = await request.GetResponseAsync();
 

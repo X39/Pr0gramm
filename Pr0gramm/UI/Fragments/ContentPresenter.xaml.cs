@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Pr0gramm.UI.Pages
+namespace Pr0gramm.UI.Fragments
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -88,9 +88,9 @@ namespace Pr0gramm.UI.Pages
                         case ViewType.Top:
                             return "items/get?promoted=1" + "&flags=" + this.filterMode + (string.IsNullOrWhiteSpace(data) ? "" : "&tags=" + System.Net.WebUtility.UrlEncode(data));
                         case ViewType.UserFavorites:
-                            return "items/get?likes=" + System.Net.WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
+                            return "items/get?likes=" + WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
                         case ViewType.UserImages:
-                            return "items/get?user=" + System.Net.WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
+                            return "items/get?user=" + WebUtility.UrlEncode(data) + "&flags=" + this.filterMode;
                         default:
                             return "";
                     }
@@ -131,7 +131,7 @@ namespace Pr0gramm.UI.Pages
         }
         public async Task FetchItems(FetchDirection fd)
         {
-            string url = Settings.Pr0grammUrl.Api;
+            string url = app.Settings.Pr0grammUrl.Api;
             url += this.Source.RequestPath;
             switch(fd)
             {
@@ -146,8 +146,8 @@ namespace Pr0gramm.UI.Pages
             WebRequest request = WebRequest.Create(url);
             request.Method = "GET";
             request.Credentials = CredentialCache.DefaultCredentials;
-            request.Headers["User-Agent"] = Settings.UserAgent;
-            ((HttpWebRequest)request).CookieContainer = Settings.Instance.Cookie;
+            request.Headers["User-Agent"] = app.Settings.UserAgent;
+            ((HttpWebRequest)request).CookieContainer = app.Settings.Instance.Cookie;
             
             var response = await request.GetResponseAsync();
 
@@ -191,7 +191,7 @@ namespace Pr0gramm.UI.Pages
                 img.Height = 128;
                 
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                bi.UriSource = new Uri(Settings.Pr0grammUrl.Thumb + it.Thumb, UriKind.Absolute);
+                bi.UriSource = new Uri(app.Settings.Pr0grammUrl.Thumb + it.Thumb, UriKind.Absolute);
                 img.Source = bi;
                 Button btn = new Button();
 
@@ -207,7 +207,7 @@ namespace Pr0gramm.UI.Pages
                 };
                 btn.Click += (sender, e) =>
                 {
-                    this.Overlay.Navigate(typeof(Pages.ImageView), it);
+                    this.Overlay.Navigate(typeof(ImageView), it);
                     this.Overlay.Visibility = Visibility.Visible;
                 };
                 this.Presenter.Children.Add(btn);

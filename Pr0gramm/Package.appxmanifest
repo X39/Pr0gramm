@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="16e1e3a5-feb4-4406-baad-48ca8bf074e2" Publisher="CN=Marco.Silipo" Version="1.0.0.0" />
+  <Identity Name="16e1e3a5-feb4-4406-baad-48ca8bf074e2" Publisher="CN=poyopaya" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="16e1e3a5-feb4-4406-baad-48ca8bf074e2" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Pr0gramm</DisplayName>
-    <PublisherDisplayName>Marco.Silipo</PublisherDisplayName>
+    <PublisherDisplayName>X39 &amp; Poyopaya</PublisherDisplayName>
     <Logo>Assets\Square200x200Logo.png</Logo>
   </Properties>
   <Dependencies>
@@ -22,7 +22,7 @@
             <uap:ShowOn Tile="square310x310Logo" />
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#161618" />
       </uap:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="Background.SyncTask">

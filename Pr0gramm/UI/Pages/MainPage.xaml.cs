@@ -2,7 +2,7 @@
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace Pr0gramm
+namespace Pr0gramm.UI.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -12,7 +12,7 @@ namespace Pr0gramm
         public MainPage()
         {
             this.InitializeComponent();
-            this.ContentFrame.Navigate(typeof(UI.Pages.ContentPresenter), new UI.Pages.ContentPresenter.ViewSource(UI.Pages.ContentPresenter.ViewSource.ViewType.New));
+            this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.New));
         }
     }
 }

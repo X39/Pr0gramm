@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Pr0gramm.UI.Pages
+namespace Pr0gramm.UI.Fragments
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -28,7 +28,7 @@ namespace Pr0gramm.UI.Pages
                 this.Source = (API.Image)e.Parameter;
                 this.Info = await API.ItemInfo.Fetch(this.Source);
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                bi.UriSource = new Uri(Settings.Pr0grammUrl.Image + this.Source.ImagePath, UriKind.Absolute);
+                bi.UriSource = new Uri(app.Settings.Pr0grammUrl.Image + this.Source.ImagePath, UriKind.Absolute);
                 this.CurrentImage.Source = bi;
 
                 foreach(var it in this.Info.Tags)
