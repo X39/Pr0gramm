@@ -4,9 +4,12 @@
     xmlns:local="using:Pr0gramm.UI">
 
     <x:String x:Key="str_NavPane_New">neu</x:String>
-    <x:String x:Key="str_NavPane_Top">top</x:String>
+    <x:String x:Key="str_NavPane_Top">beliebt</x:String>
+    <x:String x:Key="str_NavPane_Stalk">stelz</x:String>
 
     <x:String x:Key="str_Send">Abschicken</x:String>
     <x:String x:Key="str_Reply">Antworten</x:String>
     <x:String x:Key="str_Back">Zurück</x:String>
+    <x:String x:Key="str_InputSearch">%Kategorie% durchsuchen</x:String>
+    <x:String x:Key="str_NotLoggedIn">Nicht eingeloggt</x:String>
 </ResourceDictionary>

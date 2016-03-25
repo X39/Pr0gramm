@@ -13,9 +13,12 @@ namespace Pr0gramm.UI.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public string username = "Username";
+
         public MainPage()
         {
             this.InitializeComponent();
+            user.Text = "X39";
             this.applyTitleBarTheme();
             this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.New));
 
