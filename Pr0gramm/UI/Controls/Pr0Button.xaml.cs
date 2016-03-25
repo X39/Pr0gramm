@@ -34,17 +34,60 @@ namespace Pr0gramm.UI.Controls
             set { SetValue(TextProperty, value); }
         }
 
+        public static readonly DependencyProperty ToggledProperty = DependencyProperty.Register("Toggled", typeof(bool), typeof(bool), new PropertyMetadata(false));
+        public bool Toggled
+        {
+            get { return (bool)GetValue(ToggledProperty); }
+            set
+            {
+                SetValue(ToggledProperty, value);
+                btn.IsChecked = value;
+                var eh = CheckStateChanged;
+                if (eh != null)
+                    eh(this, btn.IsChecked.Value);
+            }
+        }
+
+        public static readonly DependencyProperty AllowUserToggleProperty = DependencyProperty.Register("AllowUserToggle", typeof(bool), typeof(bool), new PropertyMetadata(false));
+        public bool AllowUserToggle
+        {
+            get { return (bool)GetValue(AllowUserToggleProperty); }
+            set { SetValue(AllowUserToggleProperty, value); }
+        }
+
         public Pr0Button()
         {
             this.InitializeComponent();
         }
 
         public event EventHandler<RoutedEventArgs> Click;
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public event EventHandler<bool> CheckStateChanged;
+        private void btn_Click(object sender, RoutedEventArgs e)
         {
             var eh = Click;
             if (eh != null)
                 eh(this, e);
+        }
+
+        private void btn_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.AllowUserToggle)
+            {
+                if (btn.IsChecked != this.Toggled)
+                {
+                    var eh = CheckStateChanged;
+                    if (eh != null)
+                        eh(this, btn.IsChecked.Value);
+                    this.Toggled = btn.IsChecked.Value;
+                }
+            }
+            else
+            {
+                if (btn.IsChecked != this.Toggled)
+                {
+                    btn.IsChecked = this.Toggled;
+                }
+            }
         }
     }
 }
