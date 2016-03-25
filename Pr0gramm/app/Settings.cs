@@ -18,12 +18,33 @@ namespace Pr0gramm.app
             }
         }
 
-        public bool HasChanges { get; private set; }
+        public bool UseHttps
+        {
+            get
+            {
+                var val = Windows.Storage.ApplicationData.Current.LocalSettings.Values["UseHttps"];
+                return val == null ? false : (bool)val;
+            }
+            set { Windows.Storage.ApplicationData.Current.LocalSettings.Values["UseHttps"] = value; }
+        }
 
-        private bool _UseHttps;
-        public bool UseHttps { get { return this._UseHttps; } set { if (value != this._UseHttps) this.HasChanges = true; this._UseHttps = value; } }
-        private CookieContainer _Cookie;
-        public CookieContainer Cookie { get { return this._Cookie; } set { if (value != this._Cookie) this.HasChanges = true; this._Cookie = value; } }
+        private CookieContainer _Cookie = null;
+        public CookieContainer Cookie
+        {
+            get
+            {
+                if (_Cookie == null)
+                {
+                    var val = Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"];
+                    if (val == null)
+                        return null;
+                    this._Cookie = new CookieContainer();
+                    this._Cookie.SetCookies(new Uri(Pr0grammUrl.Base), (string)val);
+                }
+                return this._Cookie;
+            }
+            set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value.GetCookieHeader(new Uri(Pr0grammUrl.Base)); }
+        }
 
         public static readonly string UserAgent = @"Pr0gramm/UWP/1.0";
 
@@ -38,21 +59,9 @@ namespace Pr0gramm.app
 
         ~Settings()
         {
-            if (this.HasChanges)
-                this.save();
         }
         private Settings()
         {
-            this.load();
-        }
-
-        private void load()
-        {
-            //throw new NotImplementedException();
-        }
-        public void save()
-        {
-            throw new NotImplementedException();
         }
     }
 }
