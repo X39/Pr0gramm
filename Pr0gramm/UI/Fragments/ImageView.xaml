@@ -70,7 +70,7 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBox  Grid.Row="0" MinHeight="64" AcceptsReturn="True" Style="{StaticResource pr0TextBox}"/>
+                                <TextBox  Grid.Row="0" MinHeight="64" AcceptsReturn="True" Style="{StaticResource pr0TextBox}" PlaceholderText="{StaticResource pr0_placeholder_WriteComment}"/>
                                 <uc:Pr0Button Text="{StaticResource str_Send}" Grid.Row="1" Background="{StaticResource pr0_orange}" Margin="0, 15, 0, 0"/>
                             </Grid>
                             <StackPanel x:Name="CommentsStackPanel"/>
