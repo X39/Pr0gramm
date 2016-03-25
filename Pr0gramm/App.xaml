@@ -16,7 +16,7 @@
                     <SolidColorBrush Color="#F2F5F4" x:Key="pr0_textColor"/>
                     <SolidColorBrush Color="#888888" x:Key="pr0_textColorGreyed"/>
                     <SolidColorBrush Color="#75c0c7" x:Key="pr0_linkColor"/>
-                    <SolidColorBrush Color="#75c0c7" x:Key="pr0_zomfg"/>
+                    <SolidColorBrush Color="#fc8833" x:Key="pr0_zomfg"/>
 
 
                     <SolidColorBrush Color="#444444" x:Key="pr0_user_banned"/>
