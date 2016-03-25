@@ -12,6 +12,9 @@ namespace Pr0gramm
     /// </summary>
     sealed partial class App : Application
     {
+
+        public static Pr0gramm.API.User ThisUser;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -23,6 +26,7 @@ namespace Pr0gramm
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            ThisUser = null;
         }
 
         /// <summary>
