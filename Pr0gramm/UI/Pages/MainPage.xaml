@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource pr0_orange}">
             <Grid.ColumnDefinitions>
@@ -60,10 +61,19 @@
                 <uc:Pr0Button x:Name="settings" PathData="{StaticResource pr0_settings}" PathHeight="18" PathMargin="5,5,5,5" Text="" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4"/>
             </Grid>
         </Grid>
-        <!--
-        <ContentControl DataContext="{StaticResource ContentPresenter}" x:Name="Content" Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource pr0_grey}"/>
-        -->
-
         <Frame x:Name="ContentFrame" Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Grid Background="{StaticResource pr0_lightGrey}" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Foreground="{StaticResource pr0_orange}" VerticalAlignment="Center">Mit</TextBlock>
+            <Viewbox Grid.Column="2" Margin="8">
+                <Path Fill="{StaticResource pr0_orange}" Data="{StaticResource pr0_heart}"  Stretch="UniformToFill"></Path>
+            </Viewbox>
+            <TextBlock Grid.Column="3" Foreground="{StaticResource pr0_orange}" VerticalAlignment="Center">gemacht!</TextBlock>
+        </Grid>
     </Grid>
 </Page>
