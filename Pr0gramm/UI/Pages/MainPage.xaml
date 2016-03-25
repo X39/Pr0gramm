@@ -63,7 +63,7 @@
         </Grid>
         <Frame x:Name="ContentFrame" Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         <Grid Background="{StaticResource pr0_lightGrey}" Grid.Row="2">
-            <TextBlock Grid.Column="1" Foreground="{StaticResource pr0_orange}" VerticalAlignment="Center">Mit ♡ gemacht!</TextBlock>
+            <TextBlock Grid.Column="1" Foreground="{StaticResource pr0_orange}" VerticalAlignment="Center">Mit &lt;3 gemacht!</TextBlock>
         </Grid>
     </Grid>
 </Page>
