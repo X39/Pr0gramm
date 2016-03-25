@@ -43,7 +43,7 @@ namespace Pr0gramm.app
                 }
                 return this._Cookie;
             }
-            set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value.GetCookieHeader(new Uri(Pr0grammUrl.Base)); }
+            set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.GetCookieHeader(new Uri(Pr0grammUrl.Base)); }
         }
 
         public static readonly string UserAgent = @"Pr0gramm/UWP/1.0";

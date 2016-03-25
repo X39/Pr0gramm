@@ -22,7 +22,7 @@ namespace Pr0gramm.UI.Controls
             }
 
             this.isOpElement.Visibility = comment.Author == comment.Owner.Owner.User ? Visibility.Visible : Visibility.Collapsed;
-            this.AuthorRank.Fill = new User.Rank((int)comment.Mark).Color;
+            this.AuthorRank.Fill = new API.ProfileUtil.Mark((int)comment.Mark).Color;
             this.Created.Text = comment.Created.ToString();
         }
     }
