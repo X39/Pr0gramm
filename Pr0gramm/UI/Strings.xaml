@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.UI">
+
+    <x:String x:Key="str_NavPane_New">neu</x:String>
+    <x:String x:Key="str_NavPane_Top">top</x:String>
+
+    <x:String x:Key="str_Send">Abschicken</x:String>
+    <x:String x:Key="str_Reply">Antworten</x:String>
+    <x:String x:Key="str_Back">Zurück</x:String>
+</ResourceDictionary>

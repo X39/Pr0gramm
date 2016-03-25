@@ -31,8 +31,8 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <uc:Pr0Button Text="neu" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
-                <uc:Pr0Button Text="top" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
+                <uc:Pr0Button Text="{StaticResource str_NavPane_New}" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
+                <uc:Pr0Button Text="{StaticResource str_NavPane_Top}" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4"/>
             </Grid>
             <Grid x:Name="Grid_ControlBar" Grid.Column="2" HorizontalAlignment="Right" Margin="0, 0, 5, 0">
                 <Grid.ColumnDefinitions>

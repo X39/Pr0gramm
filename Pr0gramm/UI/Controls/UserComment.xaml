@@ -44,7 +44,7 @@
                         <TextBlock x:Name="AuthorElement" Text="USERNAME" Foreground="{StaticResource pr0_textColor}" Height="Auto"/>
                         <Ellipse x:Name="AuthorRank" Width="5" Height="5" Fill="White" Margin="5,0,5,0"/>
                         <TextBlock x:Name="Created" Text="DATE" Foreground="{StaticResource pr0_textColor}" Margin="5,0,5,0"/>
-                        <uc:Pr0Button PathData="{StaticResource pr0_reply}" PathHeight="8" PathMargin="0,0,5,0" Text="Antworten" Padding="8,0"/>
+                        <uc:Pr0Button PathData="{StaticResource pr0_reply}" PathHeight="8" PathMargin="0,0,5,0" Text="{StaticResource str_Reply}" Padding="8,0"/>
                     </StackPanel>
                 </Grid>
             </Grid>
