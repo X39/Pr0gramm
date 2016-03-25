@@ -77,7 +77,7 @@
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
-                <uc:Pr0Button x:Name="BackButton" Grid.Row="1" PathData="{StaticResource Back}" PathHeight="16" PathMargin="0,0,0,0" Padding="5" Text="{StaticResource str_Back}" Click="BackButton_Click" VerticalAlignment="Bottom"/>
+                <uc:Pr0Button x:Name="BackButton" Grid.Row="1" PathData="{StaticResource pr0_backnav}" PathHeight="16" PathMargin="0,0,0,0" Padding="5" Text="{StaticResource str_Back}" Click="BackButton_Click" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Grid>
