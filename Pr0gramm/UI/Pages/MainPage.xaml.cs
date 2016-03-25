@@ -12,7 +12,27 @@ namespace Pr0gramm.UI.Pages
         public MainPage()
         {
             this.InitializeComponent();
+            btnNew_Click(btnNew, new Windows.UI.Xaml.RoutedEventArgs());
+        }
+
+        private void clearToggleStates()
+        {
+            btnNew.Toggled = false;
+            btnTop.Toggled = false;
+        }
+
+        private void btnNew_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            clearToggleStates();
+            btnNew.Toggled = true;
             this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.New));
+        }
+
+        private void btnTop_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            clearToggleStates();
+            btnTop.Toggled = true;
+            this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.Top));
         }
     }
 }
