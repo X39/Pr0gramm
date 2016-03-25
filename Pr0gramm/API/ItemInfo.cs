@@ -52,13 +52,13 @@ namespace Pr0gramm.API
         }
         public List<Tag> Tags { get; private set; }
         public List<Comment> Comments { get; private set; }
-        public long Ts { get; private set; }
+        public DateTime Timestamp { get; private set; }
         public string Cache { get; private set; }
         public long Rt { get; private set; }
         public long Qc { get; private set; }
         public Image Owner { get; private set; }
 
-        public ItemInfo(asapJson.JsonNode sourceNode, Image owner)
+        private ItemInfo(asapJson.JsonNode sourceNode, Image owner)
         {
             this.Tags = new List<Tag>();
             foreach (var node in sourceNode.getValue_Object()["tags"].getValue_Array())
@@ -84,7 +84,7 @@ namespace Pr0gramm.API
                 }
             }
 
-            this.Ts = (long)sourceNode.getValue_Object()["ts"].getValue_Number();
+            this.Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(sourceNode.getValue_Object()["ts"].getValue_Number());
             this.Cache = sourceNode.getValue_Object()["cache"].getValue_String();
             this.Rt = (long)sourceNode.getValue_Object()["rt"].getValue_Number();
             this.Qc = (long)sourceNode.getValue_Object()["qc"].getValue_Number();
@@ -104,6 +104,7 @@ namespace Pr0gramm.API
             var response = await request.GetResponseAsync();
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd(), true);
+            response.Dispose();
             return new ItemInfo(responseNode, img);
         }
     }
