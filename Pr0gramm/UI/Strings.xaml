@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Pr0gramm.UI">
 
+    <x:String x:Key="str_default">ERR0R</x:String>
     <x:String x:Key="str_NavPane_New">neu</x:String>
     <x:String x:Key="str_NavPane_Top">beliebt</x:String>
     <x:String x:Key="str_NavPane_Stalk">stelz</x:String>
@@ -10,6 +11,7 @@
     <x:String x:Key="str_Send">Abschicken</x:String>
     <x:String x:Key="str_Reply">Antworten</x:String>
     <x:String x:Key="str_Back">Zurück</x:String>
-    <x:String x:Key="str_InputSearch">%Kategorie% durchsuchen</x:String>
+    <x:String x:Key="str_InputSearch">Suchen ...</x:String>
     <x:String x:Key="str_NotLoggedIn">Nicht eingeloggt</x:String>
+    <x:String x:Key="pr0_placeholder_WriteComment">Kommentar schreiben ...</x:String>
 </ResourceDictionary>
