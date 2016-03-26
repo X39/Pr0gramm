@@ -1,4 +1,4 @@
-﻿namespace Pr0gramm.API
+﻿namespace Pr0gramm.API.Util
 {
     public class Image
     {

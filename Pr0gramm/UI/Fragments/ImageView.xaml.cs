@@ -18,14 +18,14 @@ namespace Pr0gramm.UI.Fragments
             this.InitializeComponent();
         }
 
-        public API.Image Source { get; private set; }
+        public API.Util.Image Source { get; private set; }
         public API.ItemInfo Info { get; private set; }
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is API.Image)
+            if (e.Parameter is API.Util.Image)
             {
-                this.Source = (API.Image)e.Parameter;
+                this.Source = (API.Util.Image)e.Parameter;
                 this.Info = await API.ItemInfo.Fetch(this.Source);
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
                 bi.UriSource = new Uri(app.Settings.Pr0grammUrl.Image + this.Source.ImagePath, UriKind.Absolute);

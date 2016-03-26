@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="API\Profile.cs" />
     <Compile Include="API\ProfileUtil\Mark.cs" />
+    <Compile Include="API\Util\Message.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -112,7 +113,7 @@
     <Compile Include="UI\Fragments\ImageView.xaml.cs">
       <DependentUpon>ImageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="API\Image.cs" />
+    <Compile Include="API\Util\Image.cs" />
     <Compile Include="API\ItemInfo.cs" />
     <Compile Include="API\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

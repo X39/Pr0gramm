@@ -48,9 +48,9 @@ namespace Pr0gramm.API
         public string Cache { get; private set; }
         public long Rt { get; private set; }
         public long Qc { get; private set; }
-        public Image Owner { get; private set; }
+        public Util.Image Owner { get; private set; }
 
-        private ItemInfo(asapJson.JsonNode sourceNode, Image owner)
+        private ItemInfo(asapJson.JsonNode sourceNode, Util.Image owner)
         {
             this.Tags = new List<Tag>();
             foreach (var node in sourceNode.getValue_Object()["tags"].getValue_Array())
@@ -83,7 +83,7 @@ namespace Pr0gramm.API
 
             this.Owner = owner;
         }
-        public static async Task<ItemInfo> Fetch(Image img)
+        public static async Task<ItemInfo> Fetch(Util.Image img)
         {
             string url = app.Settings.Pr0grammUrl.Api;
             url += "items/info?itemId=" + img.Id;
