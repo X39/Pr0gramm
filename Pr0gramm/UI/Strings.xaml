@@ -9,9 +9,17 @@
     <x:String x:Key="str_NavPane_Stalk">stelz</x:String>
 
     <x:String x:Key="str_Send">Abschicken</x:String>
+    <x:String x:Key="str_Confirm">OK</x:String>
+    <x:String x:Key="str_Abort">Abbrechen</x:String>
     <x:String x:Key="str_Reply">Antworten</x:String>
     <x:String x:Key="str_Back">Zurück</x:String>
     <x:String x:Key="str_InputSearch">Suchen ...</x:String>
     <x:String x:Key="str_NotLoggedIn">Nicht eingeloggt</x:String>
     <x:String x:Key="pr0_placeholder_WriteComment">Kommentar schreiben ...</x:String>
+
+    <x:String x:Key="pr0_settings_EMailLabel">E-Mail</x:String>
+    <x:String x:Key="pr0_settings_PasswordLabel">Passwort</x:String>
+    <x:String x:Key="pr0_settings_FavVisibilityLabel">Favoriten sichtbarkeit</x:String>
+    <x:String x:Key="pr0_settings_FavVisibility_All">Alle</x:String>
+    <x:String x:Key="pr0_settings_FavVisibility_OnlyMe">Nur für mich</x:String>
 </ResourceDictionary>
