@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="API\Profile.cs" />
     <Compile Include="API\ProfileUtil\Mark.cs" />
+    <Compile Include="API\ProfileUtil\Badge.cs" />
     <Compile Include="API\Util\Message.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
