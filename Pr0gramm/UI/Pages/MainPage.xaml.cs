@@ -26,6 +26,7 @@ namespace Pr0gramm.UI.Pages
         {
             btnNew.Toggled = false;
             btnTop.Toggled = false;
+            btnSettings.Toggled = false;
         }
 
         private void btnNew_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -52,6 +53,13 @@ namespace Pr0gramm.UI.Pages
             clearToggleStates();
             btnTop.Toggled = true;
             this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.Top));
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            clearToggleStates();
+            btnSettings.Toggled = true;
+            this.ContentFrame.Navigate(typeof(Fragments.SettingsPage));
         }
     }
 }

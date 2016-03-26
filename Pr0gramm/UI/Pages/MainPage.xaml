@@ -58,7 +58,7 @@
                 </Grid.ColumnDefinitions>
                 <uc:Pr0Button x:Name="user" Text="{StaticResource str_default}" Grid.Column="0" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4" />
                 <uc:Pr0Button x:Name="msgButton" PathData="{StaticResource pr0_message}" PathHeight="18" PathMargin="5,5,5,5" Text="0" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4"/>
-                <uc:Pr0Button x:Name="settings" PathData="{StaticResource pr0_settings}" PathHeight="18" PathMargin="5,5,5,5" Text="" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4"/>
+                <uc:Pr0Button x:Name="btnSettings" PathData="{StaticResource pr0_settings}" PathHeight="18" PathMargin="5,5,5,5" Text="" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4" Click="btnSettings_Click"/>
             </Grid>
         </Grid>
         <Frame x:Name="ContentFrame" Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>

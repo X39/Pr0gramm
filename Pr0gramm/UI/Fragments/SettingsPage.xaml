@@ -1,0 +1,77 @@
+﻿<Page
+    x:Class="Pr0gramm.UI.Fragments.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.UI.Fragments"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:uc="using:Pr0gramm.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Pivot x:Name="rootPivot" Background="{StaticResource pr0_grey}" Foreground="{StaticResource pr0_textColor}">
+        <PivotItem>
+            <PivotItem.Header>
+                <TextBlock Text="Applikation" Foreground="{StaticResource pr0_textColor}"/>
+            </PivotItem.Header>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="0,2.5,0,2.5"/>
+                        <Setter Property="Padding" Value="2.5,0,0,0"/>
+                        <Setter Property="Background" Value="{StaticResource pr0_cha0sGrey}"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{StaticResource pr0_settings_FavVisibilityLabel}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                    <StackPanel Grid.Column="1">
+                        <RadioButton Content="{StaticResource pr0_settings_FavVisibility_OnlyMe}" HorizontalAlignment="Right" Style="{StaticResource pr0RadioButton}"/>
+                        <RadioButton Content="{StaticResource pr0_settings_FavVisibility_All}" HorizontalAlignment="Right" Style="{StaticResource pr0RadioButton}"/>
+                    </StackPanel>
+                </Grid>
+                <!-- ToDo: Add "user-status" section-->
+                <!-- ToDo: Add "Pr0mium Funktionen" section-->
+            </StackPanel>
+        </PivotItem>
+        <PivotItem>
+            <PivotItem.Header>
+                <TextBlock Text="Account" Foreground="{StaticResource pr0_textColor}"/>
+            </PivotItem.Header>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="0,2.5,0,2.5"/>
+                        <Setter Property="Padding" Value="2.5,0,0,0"/>
+                        <Setter Property="Background" Value="{StaticResource pr0_cha0sGrey}"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{StaticResource pr0_settings_EMailLabel}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                    <TextBox x:Name="tbAccountEMail" HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource pr0TextBox}" MinWidth="200" Margin="15,5,0,2.5"/>
+                    <uc:Pr0Button Text="{StaticResource str_Confirm}" Grid.Column="2" Padding="10,0,10,0"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{StaticResource pr0_settings_PasswordLabel}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                    <StackPanel Grid.Column="1">
+                        <PasswordBox x:Name="pbAccountPassword1" HorizontalAlignment="Stretch" Style="{StaticResource pr0PasswordBox}" MinWidth="200" Margin="15,5,0,2.5"/>
+                        <PasswordBox x:Name="pbAccountPassword2" HorizontalAlignment="Stretch" Style="{StaticResource pr0PasswordBox}" MinWidth="200" Margin="15,2.5,0,5"/>
+                    </StackPanel>
+                    <uc:Pr0Button Text="{StaticResource str_Confirm}" Grid.Column="2" Padding="10,0,10,0"/>
+                </Grid>
+            </StackPanel>
+        </PivotItem>
+    </Pivot>
+</Page>
