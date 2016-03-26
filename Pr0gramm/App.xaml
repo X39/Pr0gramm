@@ -11,6 +11,7 @@
                     <SolidColorBrush Color="#161618" x:Key="pr0_grey"/>
                     <SolidColorBrush Color="#303032" x:Key="pr0_lightGrey"/>
                     <SolidColorBrush Color="#49494B" x:Key="pr0_lighterGrey"/>
+                    <SolidColorBrush Color="#212121" x:Key="pr0_cha0sGrey"/>
                     <SolidColorBrush Color="#EE4D2E" x:Key="pr0_orange"/>
                     <SolidColorBrush Color="#FF6748" x:Key="pr0_lightorange"/>
                     <SolidColorBrush Color="#F2F5F4" x:Key="pr0_textColor"/>
