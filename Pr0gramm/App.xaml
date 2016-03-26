@@ -13,7 +13,8 @@
                     <SolidColorBrush Color="#49494B" x:Key="pr0_lighterGrey"/>
                     <SolidColorBrush Color="#212121" x:Key="pr0_cha0sGrey"/>
                     <SolidColorBrush Color="#EE4D2E" x:Key="pr0_orange"/>
-                    <SolidColorBrush Color="#FF6748" x:Key="pr0_lightorange"/>
+                    <SolidColorBrush Color="#FF6748" x:Key="pr0_lightOrange"/>
+                    <SolidColorBrush Color="#FF8061" x:Key="pr0_lighterOrange"/>
                     <SolidColorBrush Color="#F2F5F4" x:Key="pr0_textColor"/>
                     <SolidColorBrush Color="#888888" x:Key="pr0_textColorGreyed"/>
                     <SolidColorBrush Color="#75c0c7" x:Key="pr0_linkColor"/>

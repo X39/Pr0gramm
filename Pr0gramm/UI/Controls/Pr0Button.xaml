@@ -77,10 +77,10 @@
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_textColor}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_lightorange}" />
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_lightOrange}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonPath" Storyboard.TargetProperty="Fill">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_lightorange}" />
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_lightOrange}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
