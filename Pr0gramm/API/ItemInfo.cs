@@ -22,33 +22,25 @@ namespace Pr0gramm.API
         }
         public class Comment
         {
+            private API.Util.Message _msg;
             public List<Comment> Children { get; private set; }
-            public string Content { get; private set; }
-            public long Confidence { get; private set; }
-            public DateTime Created { get; private set; }
-            public long Down { get; private set; }
-            public long Id { get; private set; }
-            public long Mark { get; private set; }
-            public long Parent { get; private set; }
-            public string Author { get; private set; }
-            public long Up { get; private set; }
+            public string Content { get { return _msg.Content; } }
+            public long Confidence { get { return _msg.Confidence; } }
+            public DateTime Created { get { return _msg.Created; } }
+            public long Down { get { return _msg.Down; } }
+            public long Id { get { return _msg.Id; } }
+            public long Mark { get { return _msg.Mark; } }
+            public long Parent { get { return _msg.Parent; } }
+            public string Author { get { return _msg.Author; } }
+            public long Up { get { return _msg.Up; } }
             public ItemInfo Owner { get; private set; }
 
             public Comment(asapJson.JsonNode souceNode, ItemInfo owner)
             {
+                this._msg = new Util.Message(souceNode);
                 this.Children = new List<Comment>();
-                this.Id = (long)souceNode.getValue_Object()["id"].getValue_Number();
-                this.Parent = (long)souceNode.getValue_Object()["parent"].getValue_Number();
-                this.Content = souceNode.getValue_Object()["content"].getValue_String();
-                this.Created = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(souceNode.getValue_Object()["created"].getValue_Number()); ;
-                this.Up = (long)souceNode.getValue_Object()["up"].getValue_Number();
-                this.Down = (long)souceNode.getValue_Object()["down"].getValue_Number();
-                this.Confidence = (long)souceNode.getValue_Object()["confidence"].getValue_Number();
-                this.Author = souceNode.getValue_Object()["name"].getValue_String();
-                this.Mark = (long)souceNode.getValue_Object()["mark"].getValue_Number();
                 this.Owner = owner;
             }
-
         }
         public List<Tag> Tags { get; private set; }
         public List<Comment> Comments { get; private set; }
