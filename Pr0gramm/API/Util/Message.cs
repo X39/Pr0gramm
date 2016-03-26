@@ -31,20 +31,14 @@ namespace Pr0gramm.API.Util
             this.Created = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(souceNode.getValue_Object()["created"].getValue_Number());
 
             //Only for ItemInfo messages
-            tmpNode = souceNode.getValue_Object()["parent"];
-            this.Parent = tmpNode == null ? 0 : (long)tmpNode.getValue_Number();
-            tmpNode = souceNode.getValue_Object()["confidence"];
-            this.Confidence = tmpNode == null ? 0 : (long)tmpNode.getValue_Number();
-            tmpNode = souceNode.getValue_Object()["name"];
-            this.Author = tmpNode == null ? "" : tmpNode.getValue_String();
-            tmpNode = souceNode.getValue_Object()["mark"];
-            this.Mark = tmpNode == null ? 0 : (long)tmpNode.getValue_Number();
+            this.Parent = souceNode.getValue_Object().ContainsKey("parent") ? 0 : (long)souceNode.getValue_Object()["parent"].getValue_Number();
+            this.Confidence = souceNode.getValue_Object().ContainsKey("confidence") ? 0 : (long)souceNode.getValue_Object()["confidence"].getValue_Number();
+            this.Author = souceNode.getValue_Object().ContainsKey("name") ? "" : souceNode.getValue_Object()["name"].getValue_String();
+            this.Mark = souceNode.getValue_Object().ContainsKey("mark") ? 0 : (long)souceNode.getValue_Object()["mark"].getValue_Number();
 
             //Only for Profile messages
-            tmpNode = souceNode.getValue_Object()["thumb"];
-            this.Thumb = tmpNode == null ? "" : tmpNode.getValue_String();
-            tmpNode = souceNode.getValue_Object()["itemId"];
-            this.ItemId = tmpNode == null ? 0 : (long)tmpNode.getValue_Number();
+            this.Thumb = souceNode.getValue_Object().ContainsKey("thumb") ? "" : souceNode.getValue_Object()["thumb"].getValue_String();
+            this.ItemId = souceNode.getValue_Object().ContainsKey("itemId") ? 0 : (long)souceNode.getValue_Object()["itemId"].getValue_Number();
         }
     }
 }

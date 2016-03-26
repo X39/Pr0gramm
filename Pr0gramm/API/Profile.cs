@@ -33,10 +33,8 @@ namespace Pr0gramm.API
             this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
             this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();
 
-            tmpNode = tmpNode.getValue_Object()["bannedUntil"];
-            if(tmpNode != null && tmpNode.Type != JsonNode.EJType.Object)
+            if (tmpNode.getValue_Object().ContainsKey("bannedUntil") && tmpNode.getValue_Object()["bannedUntil"].Type != JsonNode.EJType.Object)
                 this.BannedUntil = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(tmpNode.getValue_Number());
-
 
             tmpNode = node.getValue_Object()["comments"];
             this.Comments = new List<API.Util.Message>();
