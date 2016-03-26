@@ -17,7 +17,7 @@
                 <StackPanel.Resources>
                     <Style TargetType="Grid">
                         <Setter Property="Margin" Value="0,2.5,0,2.5"/>
-                        <Setter Property="Padding" Value="2.5,0,0,0"/>
+                        <Setter Property="Padding" Value="2.5"/>
                         <Setter Property="Background" Value="{StaticResource pr0_cha0sGrey}"/>
                     </Style>
                 </StackPanel.Resources>
@@ -44,7 +44,7 @@
                 <StackPanel.Resources>
                     <Style TargetType="Grid">
                         <Setter Property="Margin" Value="0,2.5,0,2.5"/>
-                        <Setter Property="Padding" Value="2.5,0,0,0"/>
+                        <Setter Property="Padding" Value="2.5"/>
                         <Setter Property="Background" Value="{StaticResource pr0_cha0sGrey}"/>
                     </Style>
                 </StackPanel.Resources>
@@ -55,7 +55,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{StaticResource pr0_settings_EMailLabel}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
-                    <TextBox x:Name="tbAccountEMail" HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource pr0TextBox}" MinWidth="200" Margin="15,5,0,2.5"/>
+                    <TextBox x:Name="tbAccountEMail" HorizontalAlignment="Stretch" Grid.Column="1" Style="{StaticResource pr0TextBox}" MinWidth="200" Margin="15,0,0,0"/>
                     <uc:Pr0Button Text="{StaticResource str_Confirm}" Grid.Column="2" Padding="10,0,10,0"/>
                 </Grid>
                 <Grid>
@@ -66,8 +66,8 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{StaticResource pr0_settings_PasswordLabel}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
                     <StackPanel Grid.Column="1">
-                        <PasswordBox x:Name="pbAccountPassword1" HorizontalAlignment="Stretch" Style="{StaticResource pr0PasswordBox}" MinWidth="200" Margin="15,5,0,2.5"/>
-                        <PasswordBox x:Name="pbAccountPassword2" HorizontalAlignment="Stretch" Style="{StaticResource pr0PasswordBox}" MinWidth="200" Margin="15,2.5,0,5"/>
+                        <PasswordBox x:Name="pbAccountPassword1" HorizontalAlignment="Stretch" Style="{StaticResource pr0PasswordBox}" MinWidth="200" Margin="15,0.5,0,0"/>
+                        <PasswordBox x:Name="pbAccountPassword2" HorizontalAlignment="Stretch" Style="{StaticResource pr0PasswordBox}" MinWidth="200" Margin="15,2,0,0"/>
                     </StackPanel>
                     <uc:Pr0Button Text="{StaticResource str_Confirm}" Grid.Column="2" Padding="10,0,10,0"/>
                 </Grid>
