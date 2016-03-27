@@ -23,7 +23,6 @@ namespace Pr0gramm.API.Util
 
         public Message(asapJson.JsonNode souceNode)
         {
-            asapJson.JsonNode tmpNode;
             this.Id = (long)souceNode.getValue_Object()["id"].getValue_Number();
             this.Up = (long)souceNode.getValue_Object()["up"].getValue_Number();
             this.Down = (long)souceNode.getValue_Object()["down"].getValue_Number();
