@@ -71,6 +71,12 @@
                     </StackPanel>
                     <uc:Pr0Button Text="{StaticResource str_Confirm}" Grid.Column="2" Padding="10,0,10,0"/>
                 </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <uc:Pr0Button Text="{StaticResource pr0_settings_Logout}" Click="Pr0Button_Click"/>
+                </Grid>
             </StackPanel>
         </PivotItem>
     </Pivot>

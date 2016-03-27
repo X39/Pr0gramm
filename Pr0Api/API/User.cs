@@ -81,16 +81,24 @@ namespace Pr0gramm.API
             
             client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
             var response = await client.PostAsync(new Uri(app.Settings.Pr0grammUrl.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
-            foreach(var cookie in filter.CookieManager.GetCookies(new Uri(app.Settings.Pr0grammUrl.Base)))
+            var responseNode = new JsonNode(response.Content.ToString(), true);
+            if (responseNode.getValue_Object()["success"].getValue_Boolean())
             {
-                if(cookie.Name == "me")
+                foreach (var cookie in filter.CookieManager.GetCookies(new Uri(app.Settings.Pr0grammUrl.Base)))
                 {
-                    var usr = new User(new JsonNode(response.Content.ToString(), true), cookie);
-                    response.Dispose();
-                    return usr;
+                    if (cookie.Name == "me")
+                    {
+                        var usr = new User(responseNode, cookie);
+                        response.Dispose();
+                        return usr;
+                    }
                 }
+                throw new Exception();
             }
-            throw new Exception();
+            else
+            {
+                return null;
+            }
         }
         public static User LoadFromSettings()
         {
@@ -117,6 +125,8 @@ namespace Pr0gramm.API
             var response = await client.PostAsync(new Uri(app.Settings.Pr0grammUrl.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
             response.Dispose();
             app.Settings.Instance.Cookie = null;
+            app.Settings.Instance.Pr0User = null;
+            
         }
 
     }

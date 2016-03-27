@@ -26,5 +26,13 @@ namespace Pr0gramm.UI.Fragments
         {
             this.InitializeComponent();
         }
+
+        private void Pr0Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(app.Settings.Instance.Pr0User != null)
+            {
+                app.Settings.Instance.Pr0User.Logout();
+            }
+        }
     }
 }

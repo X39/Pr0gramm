@@ -97,14 +97,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Profile.cs" />
-    <Compile Include="API\ProfileUtil\Mark.cs" />
-    <Compile Include="API\ProfileUtil\Badge.cs" />
-    <Compile Include="API\Util\Message.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="lib\asapJson\JsonNode.cs" />
     <Compile Include="UI\Fragments\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -120,9 +115,6 @@
     <Compile Include="UI\Fragments\ImageView.xaml.cs">
       <DependentUpon>ImageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="API\Util\Image.cs" />
-    <Compile Include="API\ItemInfo.cs" />
-    <Compile Include="API\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="app\Settings.cs" />
     <Compile Include="UI\Controls\Pr0Button.xaml.cs">
@@ -221,7 +213,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
