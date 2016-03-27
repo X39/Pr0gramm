@@ -18,7 +18,7 @@ namespace Pr0gramm.UI.Pages
         {
             this.InitializeComponent();
             btnNew_Click(btnNew, new Windows.UI.Xaml.RoutedEventArgs());
-            user.Text = "X39";
+            btnUser.Text = "X39";
             this.applyTitleBarTheme();
         }
 
@@ -60,6 +60,11 @@ namespace Pr0gramm.UI.Pages
             clearToggleStates();
             btnSettings.Toggled = true;
             this.ContentFrame.Navigate(typeof(Fragments.SettingsPage));
+        }
+
+        private void btnUser_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
