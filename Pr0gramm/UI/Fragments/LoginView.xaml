@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="Pr0gramm.UI.Fragments.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.UI.Fragments"
+    xmlns:uc="using:Pr0gramm.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource pr0_grey}">
+        <TextBox x:Name="tbUser" PlaceholderText="Username" Style="{StaticResource pr0TextBox}" Margin="0, 2.5, 0, 2.5" HorizontalAlignment="Center" MinWidth="256"/>
+        <PasswordBox x:Name="pbPassowrd" PlaceholderText="Password" Style="{StaticResource pr0PasswordBox}" Margin="0, 2.5, 0, 2.5" HorizontalAlignment="Center" MinWidth="256"/>
+        <uc:Pr0Button x:Name="btnLogin" Text="Login" Margin="0, 2.5, 0, 2.5" HorizontalAlignment="Center" MinWidth="256" Click="btnLogin_Click"/>
+    </StackPanel>
+</Page>

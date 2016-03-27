@@ -13,13 +13,15 @@ namespace Pr0gramm.UI.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
         public MainPage()
         {
             this.InitializeComponent();
             btnNew_Click(btnNew, new Windows.UI.Xaml.RoutedEventArgs());
-            btnUser.Text = "X39";
             this.applyTitleBarTheme();
+            if(app.Settings.Instance.Pr0User != null)
+            {
+                this.btnUser.Text = app.Settings.Instance.Pr0User.Username;
+            }
         }
 
         private void clearToggleStates()
@@ -27,6 +29,7 @@ namespace Pr0gramm.UI.Pages
             btnNew.Toggled = false;
             btnTop.Toggled = false;
             btnSettings.Toggled = false;
+            btnUser.Toggled = false;
         }
 
         private void btnNew_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -64,7 +67,18 @@ namespace Pr0gramm.UI.Pages
 
         private void btnUser_Click(object sender, RoutedEventArgs e)
         {
-            
+            clearToggleStates();
+            btnUser.Toggled = true;
+
+
+            if (app.Settings.Instance.Pr0User == null)
+            {
+                this.ContentFrame.Navigate(typeof(Fragments.LoginView));
+            }
+            else
+            {
+                //ToDo: Show Profile Pane
+            }
         }
     }
 }
