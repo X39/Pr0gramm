@@ -26,9 +26,9 @@ namespace Pr0gramm.UI.Fragments
             if (e.Parameter is API.Util.Image)
             {
                 this.Source = (API.Util.Image)e.Parameter;
-                this.Info = await API.ItemInfo.Fetch(this.Source);
+                this.Info = await API.ItemInfo.Fetch(this.Source, app.Settings.Instance.Url, app.Settings.Instance.Cookie);
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                bi.UriSource = new Uri(app.Settings.Pr0grammUrl.Image + this.Source.ImagePath, UriKind.Absolute);
+                bi.UriSource = new Uri(app.Settings.Instance.Url.Image + this.Source.ImagePath, UriKind.Absolute);
                 this.CurrentImage.Source = bi;
 
                 foreach(var it in this.Info.Tags)

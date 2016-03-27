@@ -7,7 +7,7 @@
     <ProjectGuid>{54B0A7E0-0953-497E-88D8-8A9D9AC551D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pr0Api</RootNamespace>
+    <RootNamespace>Pr0gramm.API</RootNamespace>
     <AssemblyName>Pr0Api</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -107,13 +107,19 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemInfo.cs" />
+    <Compile Include="Profile.cs" />
+    <Compile Include="ProfileUtil\Badge.cs" />
+    <Compile Include="ProfileUtil\Mark.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="Util\Image.cs" />
+    <Compile Include="Util\Message.cs" />
+    <Compile Include="lib\asapJson\JsonNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UrlProvider.cs" />
     <EmbeddedResource Include="Properties\Pr0Api.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="API\" />
-    <Folder Include="lib\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

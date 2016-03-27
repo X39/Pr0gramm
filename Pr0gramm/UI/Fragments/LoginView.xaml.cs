@@ -29,7 +29,17 @@ namespace Pr0gramm.UI.Fragments
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var usr = await API.User.Login(this.tbUser.Text, this.pbPassowrd.Password);
+            var obj = await API.User.Login(this.tbUser.Text, this.pbPassowrd.Password, app.Settings.Instance.Url);
+            if (obj == null)
+            {
+                var toast = new app.TextToast("Login Err0r", "Der Login war leider nicht sehr erfolgreich :(");
+            }
+            else
+            {
+                app.Settings.Instance.Pr0User = obj.Item1;
+                app.Settings.Instance.Cookie = obj.Item2;
+                //ToDo: Add logic to change current displayed user etc.
+            }
         }
     }
 }

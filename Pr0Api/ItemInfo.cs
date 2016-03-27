@@ -83,17 +83,17 @@ namespace Pr0gramm.API
 
             this.Owner = owner;
         }
-        public static async Task<ItemInfo> Fetch(Util.Image img)
+        public static async Task<ItemInfo> Fetch(Util.Image img, UrlProvider urlProvider, Windows.Web.Http.HttpCookie cookie = null)
         {
-            string url = app.Settings.Pr0grammUrl.Api;
+            string url = urlProvider.Api;
             url += "items/info?itemId=" + img.Id;
 
             var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            if(app.Settings.Instance.Cookie != null)
-                filter.CookieManager.SetCookie(app.Settings.Instance.Cookie);
+            if(cookie != null)
+                filter.CookieManager.SetCookie(cookie);
             Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
 
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
+            client.DefaultRequestHeaders.UserAgent.TryParseAdd(urlProvider.UserAgent);
             var response = await client.GetAsync(new Uri(url));
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);

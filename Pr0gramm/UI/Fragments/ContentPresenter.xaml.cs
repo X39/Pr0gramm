@@ -131,7 +131,7 @@ namespace Pr0gramm.UI.Fragments
         }
         public async Task FetchItems(FetchDirection fd)
         {
-            string url = app.Settings.Pr0grammUrl.Api;
+            string url = app.Settings.Instance.Url.Api;
             url += this.Source.RequestPath;
             switch(fd)
             {
@@ -149,7 +149,7 @@ namespace Pr0gramm.UI.Fragments
                 filter.CookieManager.SetCookie(app.Settings.Instance.Cookie);
             Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
 
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
+            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.Instance.Url.UserAgent);
             var response = await client.GetAsync(new Uri(url));
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
@@ -194,7 +194,7 @@ namespace Pr0gramm.UI.Fragments
                 img.Height = 128;
                 
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                bi.UriSource = new Uri(app.Settings.Pr0grammUrl.Thumb + it.Thumb, UriKind.Absolute);
+                bi.UriSource = new Uri(app.Settings.Instance.Url.Thumb + it.Thumb, UriKind.Absolute);
                 img.Source = bi;
                 Button btn = new Button();
 

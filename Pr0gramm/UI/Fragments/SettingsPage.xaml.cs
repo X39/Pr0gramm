@@ -31,7 +31,9 @@ namespace Pr0gramm.UI.Fragments
         {
             if(app.Settings.Instance.Pr0User != null)
             {
-                app.Settings.Instance.Pr0User.Logout();
+                app.Settings.Instance.Pr0User.Logout(app.Settings.Instance.Url, app.Settings.Instance.Cookie);
+                app.Settings.Instance.Pr0User = null;
+                app.Settings.Instance.Cookie = null;
             }
         }
     }

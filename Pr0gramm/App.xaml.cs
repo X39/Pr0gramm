@@ -25,7 +25,7 @@ namespace Pr0gramm
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            app.Settings.Instance.Pr0User = app.Settings.Instance.Cookie == null ? null : API.User.LoadFromSettings();
+            app.Settings.Instance.Pr0User = app.Settings.Instance.Cookie == null ? null : API.User.LoadFromCookie(app.Settings.Instance.Cookie);
         }
 
         /// <summary>
