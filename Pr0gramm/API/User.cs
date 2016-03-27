@@ -98,10 +98,10 @@ namespace Pr0gramm.API
             {
                 throw new Exception("Cannot execute without Settings.Cookie containing a cookie");
             }
-            JsonNode node = new JsonNode();
+            JsonNode node = new JsonNode(new System.Collections.Generic.Dictionary<string, JsonNode>());
             node.getValue_Object()["ts"] = new JsonNode((DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
             node.getValue_Object()["rt"] = new JsonNode(0);
-            node.getValue_Object()["qt"] = new JsonNode(0);
+            node.getValue_Object()["qc"] = new JsonNode(0);
             return new User(node, app.Settings.Instance.Cookie);
         }
         public async void Logout()
