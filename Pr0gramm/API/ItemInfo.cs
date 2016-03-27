@@ -87,15 +87,16 @@ namespace Pr0gramm.API
         {
             string url = app.Settings.Pr0grammUrl.Api;
             url += "items/info?itemId=" + img.Id;
-            WebRequest request = WebRequest.Create(url);
-            request.Method = "GET";
-            request.Credentials = CredentialCache.DefaultCredentials;
-            request.Headers["User-Agent"] = app.Settings.UserAgent;
-            ((HttpWebRequest)request).CookieContainer = app.Settings.Instance.Cookie;
 
-            var response = await request.GetResponseAsync();
+            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+            if(app.Settings.Instance.Cookie != null)
+                filter.CookieManager.SetCookie(app.Settings.Instance.Cookie);
+            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
 
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd(), true);
+            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
+            var response = await client.GetAsync(new Uri(url));
+
+            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
             response.Dispose();
             return new ItemInfo(responseNode, img);
         }

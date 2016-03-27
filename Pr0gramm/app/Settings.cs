@@ -28,8 +28,8 @@ namespace Pr0gramm.app
             set { Windows.Storage.ApplicationData.Current.LocalSettings.Values["UseHttps"] = value; }
         }
 
-        private CookieContainer _Cookie = null;
-        public CookieContainer Cookie
+        private Windows.Web.Http.HttpCookie _Cookie = null;
+        public Windows.Web.Http.HttpCookie Cookie
         {
             get
             {
@@ -38,12 +38,12 @@ namespace Pr0gramm.app
                     var val = Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"];
                     if (val == null)
                         return null;
-                    this._Cookie = new CookieContainer();
-                    this._Cookie.SetCookies(new Uri(Pr0grammUrl.Base), (string)val);
+                    this._Cookie = new Windows.Web.Http.HttpCookie("me", Settings.Pr0grammUrl.Base, "");
+                    this._Cookie.Value = (string)val;
                 }
                 return this._Cookie;
             }
-            set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.GetCookieHeader(new Uri(Pr0grammUrl.Base)); }
+            set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.Value; }
         }
 
         public static readonly string UserAgent = @"Pr0gramm/UWP/1.0";

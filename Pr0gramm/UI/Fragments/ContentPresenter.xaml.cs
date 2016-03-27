@@ -143,16 +143,19 @@ namespace Pr0gramm.UI.Fragments
                     url += @"&older=" + this.newestItem;
                     break;
             }
-            WebRequest request = WebRequest.Create(url);
-            request.Method = "GET";
-            request.Credentials = CredentialCache.DefaultCredentials;
-            request.Headers["User-Agent"] = app.Settings.UserAgent;
-            ((HttpWebRequest)request).CookieContainer = app.Settings.Instance.Cookie;
-            
-            var response = await request.GetResponseAsync();
 
-            JsonNode responseNode = new JsonNode(new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd(), true);
-            if(responseNode.getValue_Object()["error"].Type != JsonNode.EJType.Object)
+            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+            if (app.Settings.Instance.Cookie != null)
+                filter.CookieManager.SetCookie(app.Settings.Instance.Cookie);
+            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
+
+            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
+            var response = await client.GetAsync(new Uri(url));
+
+            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
+            response.Dispose();
+
+            if (responseNode.getValue_Object()["error"].Type != JsonNode.EJType.Object)
             {
                 throw new Exception(responseNode.getValue_Object()["error"].getValue_String());
             }
