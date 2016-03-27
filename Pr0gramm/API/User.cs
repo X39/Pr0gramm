@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.IO;
 
+
 namespace Pr0gramm.API
 {
     public class User
@@ -18,20 +19,15 @@ namespace Pr0gramm.API
         public long qc { get; private set; }
         public long rt { get; private set; }
 
-        private User(JsonNode node, CookieContainer cc)
+        private User(JsonNode node, Windows.Web.Http.HttpCookie cookie)
         {
             this.Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(node.getValue_Object()["ts"].getValue_Number());
             this.rt = (long)node.getValue_Object()["rt"].getValue_Number();
             this.qc = (long)node.getValue_Object()["qc"].getValue_Number();
-
-            string cookieString = cc.GetCookieHeader(new Uri(@"http://pr0gramm.com"));
-            cookieString = cookieString.Substring(cookieString.IndexOf("me=") + 3);
-            if (cookieString.Contains(";"))
-                cookieString = cookieString.Substring(0, cookieString.IndexOf(';') + 1);
             bool flag = false;
             string tmp = "";
             string output = "";
-            foreach (var c in cookieString)
+            foreach (var c in cookie.Value)
             {
                 if (flag)
                 {
@@ -66,39 +62,35 @@ namespace Pr0gramm.API
                     }
                 }
             }
+            output += ((char)Convert.ToInt32(tmp, 16));
             JsonNode cookieContent = new JsonNode(output, true);
             this.Username = cookieContent.getValue_Object()["n"].getValue_String();
             this.UserID = cookieContent.getValue_Object()["id"].getValue_String();
             //this.Unknown = (long)cookieContent.getValue_Object()["a"].getValue_Number();
             //this.Unknown = (long)cookieContent.getValue_Object()["pp"].getValue_Number();
             this.Paid = cookieContent.getValue_Object()["paid"].getValue_Boolean();
+            app.Settings.Instance.Cookie = cookie;
         }
         public static async Task<User> Login(string username, string password)
         {
             StringBuilder postDataBuilder = new StringBuilder();
             postDataBuilder.Append("name=" + WebUtility.UrlEncode(username));
             postDataBuilder.Append("&password=" + WebUtility.UrlEncode(password));
-            byte[] data = Encoding.ASCII.GetBytes(postDataBuilder.ToString());
-
-            string url = app.Settings.Pr0grammUrl.Api;
-            url += "user/login";
-            WebRequest request = WebRequest.Create(url);
-            request.Method = "POST";
-            request.Credentials = CredentialCache.DefaultCredentials;
-            request.Headers["User-Agent"] = app.Settings.UserAgent;
-            request.Headers["ContentLength"] = app.Settings.UserAgent;
-            request.ContentType = "application/x-www-form-urlencoded";
-            using (Stream stream = await request.GetRequestStreamAsync())
+            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
+            
+            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
+            var response = await client.PostAsync(new Uri(app.Settings.Pr0grammUrl.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
+            foreach(var cookie in filter.CookieManager.GetCookies(new Uri(app.Settings.Pr0grammUrl.Base)))
             {
-                stream.Write(data, 0, data.Length);
+                if(cookie.Name == "me")
+                {
+                    var usr = new User(new JsonNode(response.Content.ToString(), true), cookie);
+                    response.Dispose();
+                    return usr;
+                }
             }
-
-            var response = await request.GetResponseAsync();
-
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(new System.IO.StreamReader(response.GetResponseStream()).ReadToEnd(), true);
-            app.Settings.Instance.Cookie = ((HttpWebRequest)request).CookieContainer;
-            response.Dispose();
-            return new User(responseNode, ((HttpWebRequest)request).CookieContainer);
+            throw new Exception();
         }
         public static User LoadFromSettings()
         {
@@ -117,24 +109,14 @@ namespace Pr0gramm.API
             StringBuilder postDataBuilder = new StringBuilder();
             postDataBuilder.Append("id=" + WebUtility.UrlEncode(this.UserID));
             postDataBuilder.Append("&_nonce=" + WebUtility.UrlEncode(this._nonce));
-            byte[] data = Encoding.ASCII.GetBytes(postDataBuilder.ToString());
+            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+            filter.CookieManager.SetCookie(app.Settings.Instance.Cookie);
+            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
 
-            string url = app.Settings.Pr0grammUrl.Api;
-            url += "user/logout";
-            WebRequest request = WebRequest.Create(url);
-            request.Method = "POST";
-            request.Credentials = CredentialCache.DefaultCredentials;
-            request.Headers["User-Agent"] = app.Settings.UserAgent;
-            request.Headers["ContentLength"] = app.Settings.UserAgent;
-            request.ContentType = "application/x-www-form-urlencoded";
-            using (Stream stream = await request.GetRequestStreamAsync())
-            {
-                stream.Write(data, 0, data.Length);
-            }
-
-            var response = await request.GetResponseAsync();
-            app.Settings.Instance.Cookie = null;
+            client.DefaultRequestHeaders.UserAgent.TryParseAdd(app.Settings.UserAgent);
+            var response = await client.PostAsync(new Uri(app.Settings.Pr0grammUrl.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
             response.Dispose();
+            app.Settings.Instance.Cookie = null;
         }
 
     }
