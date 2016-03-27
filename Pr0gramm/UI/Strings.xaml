@@ -4,6 +4,7 @@
     xmlns:local="using:Pr0gramm.UI">
 
     <x:String x:Key="str_default">ERR0R</x:String>
+    <x:String x:Key="str_login">Login</x:String>
     <x:String x:Key="str_NavPane_New">neu</x:String>
     <x:String x:Key="str_NavPane_Top">beliebt</x:String>
     <x:String x:Key="str_NavPane_Stalk">stelz</x:String>
