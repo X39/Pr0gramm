@@ -73,7 +73,7 @@ namespace Pr0gramm.UI.Pages
 
             if (app.Settings.Instance.Pr0User == null)
             {
-                this.ContentFrame.Navigate(typeof(Fragments.LoginView));
+              this.ContentFrame.Navigate(typeof(Fragments.LoginView));
             }
             else
             {

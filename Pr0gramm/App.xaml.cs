@@ -13,7 +13,6 @@ namespace Pr0gramm
     sealed partial class App : Application
     {
 
-        public static Pr0gramm.API.User ThisUser;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -26,7 +25,7 @@ namespace Pr0gramm
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            ThisUser = null;
+            app.Settings.Instance.Pr0User = app.Settings.Instance.Cookie == null ? null : API.User.LoadFromSettings();
         }
 
         /// <summary>

@@ -30,7 +30,6 @@ namespace Pr0gramm.UI.Fragments
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var usr = await API.User.Login(this.tbUser.Text, this.pbPassowrd.Password);
-            Pr0gramm.app.Settings.Instance.Pr0User = usr;
         }
     }
 }

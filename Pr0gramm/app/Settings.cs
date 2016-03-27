@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Pr0gramm.API;
 
 namespace Pr0gramm.app
 {
@@ -45,6 +46,8 @@ namespace Pr0gramm.app
             }
             set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.Value; }
         }
+
+        public User Pr0User { get; internal set; }
 
         public static readonly string UserAgent = @"Pr0gramm/UWP/1.0";
 
