@@ -108,18 +108,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ItemInfo.cs" />
+    <Compile Include="ItemsGetter.cs" />
+    <Compile Include="ItemsGetterUtil\ViewSource.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="ProfileUtil\Badge.cs" />
     <Compile Include="ProfileUtil\Mark.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Util\Image.cs" />
+    <Compile Include="ItemsGetterUtil\Image.cs" />
     <Compile Include="Util\Message.cs" />
     <Compile Include="lib\asapJson\JsonNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlProvider.cs" />
     <EmbeddedResource Include="Properties\Pr0Api.rd.xml" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
