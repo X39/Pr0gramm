@@ -1,4 +1,4 @@
-﻿namespace Pr0gramm.API.Util
+﻿namespace Pr0gramm.API.ItemsGetterUtil
 {
     public class Image
     {

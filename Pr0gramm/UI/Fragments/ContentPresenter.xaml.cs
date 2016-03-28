@@ -105,7 +105,7 @@ namespace Pr0gramm.UI.Fragments
         }
 
         public ViewSource Source { get; set; }
-        private List<API.Util.Image> images;
+        private List<API.ItemsGetterUtil.Image> images;
         private int newestItem;
         private int oldestItem;
 
@@ -114,7 +114,7 @@ namespace Pr0gramm.UI.Fragments
             this.InitializeComponent();
             newestItem = -1;
             oldestItem = -1;
-            images = new List<API.Util.Image>();
+            images = new List<API.ItemsGetterUtil.Image>();
         }
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -174,10 +174,10 @@ namespace Pr0gramm.UI.Fragments
                 this.oldestItem = (int)item["promoted"].getValue_Number();
             else
                 this.oldestItem = (int)item["id"].getValue_Number();
-            List<API.Util.Image> imgList = new List<API.Util.Image>();
+            List<API.ItemsGetterUtil.Image> imgList = new List<API.ItemsGetterUtil.Image>();
             foreach(var it in items)
             {
-                imgList.Add(new API.Util.Image(it));
+                imgList.Add(new API.ItemsGetterUtil.Image(it));
             }
             if (fd == FetchDirection.Newer)
                 this.images.InsertRange(0, imgList);
