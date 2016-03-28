@@ -44,10 +44,10 @@ namespace Pr0gramm.API
             }
 
             tmpNode = node.getValue_Object()["uploads"];
-            this.Uploads = new List<API.Util.Image>();
+            this.Uploads = new List<API.ItemsGetterUtil.Image>();
             foreach (var it in tmpNode.getValue_Array())
             {
-                this.Uploads.Add(new API.Util.Image(it));
+                this.Uploads.Add(new API.ItemsGetterUtil.Image(it));
             }
 
             tmpNode = node.getValue_Object()["badges"];
@@ -74,7 +74,7 @@ namespace Pr0gramm.API
         public long Score { get; private set; }
         public long TagCount { get; private set; }
         public DateTime Timestamp { get; private set; }
-        public List<API.Util.Image> Uploads { get; private set; }
+        public List<API.ItemsGetterUtil.Image> Uploads { get; private set; }
         public long UserID { get; private set; }
         public long Username { get; private set; }
 
