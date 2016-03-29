@@ -101,6 +101,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="app\TextToast.cs" />
+    <Compile Include="UI\Controls\SelectableRichTextBlock.xaml.cs">
+      <DependentUpon>SelectableRichTextBlock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Fragments\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="UI\Controls\SelectableRichTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Fragments\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
