@@ -1,6 +1,5 @@
-﻿using System;
-using System.Net;
-using Pr0gramm.API;
+﻿using Pr0gramm.API;
+using Windows.Web.Http;
 
 namespace Pr0gramm.app
 {
@@ -33,8 +32,8 @@ namespace Pr0gramm.app
             }
         }
 
-        private Windows.Web.Http.HttpCookie _Cookie = null;
-        public Windows.Web.Http.HttpCookie Cookie
+        private HttpCookie _Cookie = null;
+        public HttpCookie Cookie
         {
             get
             {
@@ -43,7 +42,7 @@ namespace Pr0gramm.app
                     var val = Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"];
                     if (val == null)
                         return null;
-                    this._Cookie = new Windows.Web.Http.HttpCookie("me", this.Url.Base, "");
+                    this._Cookie = new HttpCookie("me", this.Url.Base, "");
                     this._Cookie.Value = (string)val;
                 }
                 return this._Cookie;
@@ -52,7 +51,7 @@ namespace Pr0gramm.app
         }
 
         public User Pr0User { get; internal set; }
-        public API.UrlProvider Url { get; internal set; }
+        public UrlProvider Url { get; internal set; }
 
         
         ~Settings()

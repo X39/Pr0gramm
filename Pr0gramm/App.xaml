@@ -44,6 +44,16 @@
                     <x:String x:Key="pr0_backnav">M 135.412,0 35.709,99.702 135.412,199.404 163.695,171.119 92.277,99.702 163.695,28.285 Z</x:String>
                     <x:String x:Key="pr0_search">"M1216 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z</x:String>
                     <x:String x:Key="pr0_upload">M1216 864q0-14-9-23l-352-352q-9-9-23-9t-23 9l-351 351q-10 12-10 24 0 14 9 23t23 9h224v352q0 13 9.5 22.5t22.5 9.5h192q13 0 22.5-9.5t9.5-22.5v-352h224q13 0 22.5-9.5t9.5-22.5zm640 288q0 159-112.5 271.5t-271.5 112.5h-1088q-185 0-316.5-131.5t-131.5-316.5q0-130 70-240t188-165q-2-30-2-43 0-212 150-362t362-150q156 0 285.5 87t188.5 231q71-62 166-62 106 0 181 75t75 181q0 76-41 138 130 31 213.5 135.5t83.5 238.5z</x:String>
+                    <x:String x:Key="toast_template">
+                        &lt;toast&gt;
+                            &lt;visual&gt;
+                                &lt;binding template = "ToastGeneric"&gt;
+                                    &lt;text&gt;{0}&lt;/text&gt;
+                                    &lt;text&gt;{1}&lt;/text&gt;
+                                &lt;/binding&gt;
+                            &lt;/visual&gt;
+                        &lt;/toast&gt;
+                    </x:String>
                 </ResourceDictionary>
                 <ResourceDictionary Source="UI/Styles.xaml"/>
                 <ResourceDictionary Source="UI/Strings.xaml"/>

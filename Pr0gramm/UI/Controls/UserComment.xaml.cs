@@ -25,5 +25,10 @@ namespace Pr0gramm.UI.Controls
             this.AuthorRank.Fill = new API.ProfileUtil.Mark((int)comment.Mark).Color;
             this.Created.Text = comment.Created.ToString();
         }
+
+        private void CommentElement_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

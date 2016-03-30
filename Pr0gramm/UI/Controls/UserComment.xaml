@@ -36,9 +36,11 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock x:Name="CommentElement" Grid.Row="0" Text="ERR0R" Foreground="{StaticResource pr0_textColor}"/>
+                    <TextBox BorderThickness="0" x:Name="CommentElement" Grid.Row="0" Foreground="{StaticResource pr0_textColor}" Text="{Binding Text, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap" TextChanged="CommentElement_TextChanged">
+                        <!-- TODO: When focussed, textbox' background needs to stay pr0_grey -> create new textbox class in styles  -->
+                    </TextBox>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Border Visibility="Visible" x:Name="isOpElement" Background="{StaticResource pr0_orange}" CornerRadius="3" Padding="3,0,3,0" Margin="0,0,5,0">
+                        <Border Visibility="Visible" x:Name="isOpElement" Background="Transparent" CornerRadius="3" Padding="3,0,3,0" Margin="0,0,5,0">
                             <TextBlock Text="OP" Foreground="{StaticResource pr0_textColor}"/>
                         </Border>
                         <TextBlock x:Name="AuthorElement" Text="USERNAME" Foreground="{StaticResource pr0_textColor}" Height="Auto"/>
