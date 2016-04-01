@@ -107,6 +107,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\RateLimitReached.cs" />
     <Compile Include="ItemInfo.cs" />
     <Compile Include="ItemsGetter.cs" />
     <Compile Include="ItemsGetterUtil\ViewSource.cs" />
