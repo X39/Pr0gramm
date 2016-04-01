@@ -70,6 +70,16 @@ namespace Pr0gramm.API
             //this.Unknown = (long)cookieContent.getValue_Object()["pp"].getValue_Number();
             this.Paid = cookieContent.getValue_Object()["paid"].getValue_Boolean();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="urlProvider"></param>
+        /// <exception cref="Exceptions.RateLimitReached">Will be thrown when you eg. tried to login too often</exception>
+        /// <exception cref="Exception">Will be thrown if something moves wrong and the actual root cause is unknown</exception>
+        /// <returns></returns>
         public static async Task<Tuple<User, Windows.Web.Http.HttpCookie>> Login(string username, string password, UrlProvider urlProvider)
         {
             StringBuilder postDataBuilder = new StringBuilder();
@@ -81,6 +91,15 @@ namespace Pr0gramm.API
             client.DefaultRequestHeaders.UserAgent.TryParseAdd(urlProvider.UserAgent);
             var response = await client.PostAsync(new Uri(urlProvider.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
             var responseNode = new JsonNode(response.Content.ToString(), true);
+            if(responseNode.getValue_Object().ContainsKey("error"))
+            {
+                switch(responseNode.getValue_Object()["error"].getValue_String())
+                {
+                    case "limitReached":
+                        throw new Exceptions.RateLimitReached();
+                }
+                throw new Exception(responseNode.getValue_Object()["error"].getValue_String());
+            }
             if (responseNode.getValue_Object()["success"].getValue_Boolean())
             {
                 foreach (var cookie in filter.CookieManager.GetCookies(new Uri(urlProvider.Base)))
