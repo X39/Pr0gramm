@@ -22,6 +22,19 @@ namespace Pr0gramm.UI.Pages
             {
                 this.btnUser.Text = app.Settings.Instance.Pr0User.Username;
             }
+
+            var versionTextBlock = new TextBlock();
+            var version = Windows.ApplicationModel.Package.Current.Id.Version;
+#if DEBUG
+            versionTextBlock.Text = "DEBUG";
+#else
+            versionTextBlock.Text = string.Format("{0}.{1}.{2}", version.Major, version.Minor, version.Build);
+#endif
+            versionTextBlock.VerticalAlignment = VerticalAlignment.Center;
+            versionTextBlock.HorizontalAlignment = HorizontalAlignment.Right;
+            versionTextBlock.Foreground = (Application.Current.Resources["pr0_orange"] as SolidColorBrush);
+            versionTextBlock.Margin = new Thickness(12, 0, 12, 0);
+            this.Footer.Children.Add(versionTextBlock);
         }
 
         private void clearToggleStates()
