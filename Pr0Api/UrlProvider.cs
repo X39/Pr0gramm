@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pr0gramm.API
+﻿namespace Pr0gramm.API
 {
     public class UrlProvider
     {
