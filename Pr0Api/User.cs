@@ -85,7 +85,7 @@ namespace Pr0gramm.API
             postDataBuilder.Append("name=" + WebUtility.UrlEncode(username));
             postDataBuilder.Append("&password=" + WebUtility.UrlEncode(password));
             
-            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
+            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString(), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/x-www-form-urlencoded"));
             var responseNode = new JsonNode(response.Content.ToString(), true);
             response.Dispose();
             if (responseNode.getValue_Object().ContainsKey("error"))
