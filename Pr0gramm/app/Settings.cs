@@ -28,39 +28,41 @@ namespace Pr0gramm.app
             set
             {
                 Windows.Storage.ApplicationData.Current.LocalSettings.Values["UseHttps"] = value;
-                this.Url = new UrlProvider(@"Pr0gramm/UWP/1.0", value);
+                APIProvider.UseHttps = value;
             }
         }
 
-        private HttpCookie _Cookie = null;
-        public HttpCookie Cookie
+        private HttpCookie _StoredCookie = null;
+        public HttpCookie StoredCookie
         {
             get
             {
-                if (_Cookie == null)
+                if (_StoredCookie == null)
                 {
                     var val = Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"];
                     if (val == null)
                         return null;
-                    this._Cookie = new HttpCookie("me", this.Url.Base, "");
-                    this._Cookie.Value = (string)val;
+                    this._StoredCookie = new HttpCookie("me", this.APIProvider.Base, "");
+                    this._StoredCookie.Value = (string)val;
                 }
-                return this._Cookie;
+                return this._StoredCookie;
             }
-            set { this._Cookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.Value; }
+            set { this._StoredCookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.Value; }
         }
 
         public User Pr0User { get; internal set; }
-        public UrlProvider Url { get; internal set; }
-
+        public ApiProvider APIProvider { get; internal set; }
         
-        ~Settings()
-        {
-        }
         private Settings()
         {
-            this.Url = new UrlProvider(@"Pr0gramm/UWP/1.0", this.UseHttps);
+            this.APIProvider = new ApiProvider(@"Pr0gramm/UWP/1.0", this.UseHttps);
             this.Pr0User = null;
+            var cookie = this.StoredCookie;
+            if(cookie != null)
+            {
+                this.APIProvider.Cookie = cookie;
+            }
+
         }
     }
 }
