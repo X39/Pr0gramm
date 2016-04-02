@@ -76,24 +76,22 @@ namespace Pr0gramm.API
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="urlProvider"></param>
+        /// <param name="apiProvider"></param>
         /// <exception cref="Exceptions.RateLimitReached">Will be thrown when you eg. tried to login too often</exception>
         /// <exception cref="Exception">Will be thrown if something moves wrong and the actual root cause is unknown</exception>
         /// <returns></returns>
-        public static async Task<Tuple<User, Windows.Web.Http.HttpCookie>> Login(string username, string password, UrlProvider urlProvider)
+        public static async Task<User> Login(string username, string password, ApiProvider apiProvider)
         {
             StringBuilder postDataBuilder = new StringBuilder();
             postDataBuilder.Append("name=" + WebUtility.UrlEncode(username));
             postDataBuilder.Append("&password=" + WebUtility.UrlEncode(password));
-            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
             
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(urlProvider.UserAgent);
-            var response = await client.PostAsync(new Uri(urlProvider.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
+            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
             var responseNode = new JsonNode(response.Content.ToString(), true);
-            if(responseNode.getValue_Object().ContainsKey("error"))
+            response.Dispose();
+            if (responseNode.getValue_Object().ContainsKey("error"))
             {
-                switch(responseNode.getValue_Object()["error"].getValue_String())
+                switch (responseNode.getValue_Object()["error"].getValue_String())
                 {
                     case "limitReached":
                         throw new Exceptions.RateLimitReached();
@@ -102,16 +100,7 @@ namespace Pr0gramm.API
             }
             if (responseNode.getValue_Object()["success"].getValue_Boolean())
             {
-                foreach (var cookie in filter.CookieManager.GetCookies(new Uri(urlProvider.Base)))
-                {
-                    if (cookie.Name == "me")
-                    {
-                        var usr = new User(responseNode, cookie);
-                        response.Dispose();
-                        return new Tuple<User, Windows.Web.Http.HttpCookie>(usr, cookie);
-                    }
-                }
-                throw new Exception();
+                return new User(responseNode, apiProvider.Cookie);
             }
             else
             {
@@ -126,17 +115,12 @@ namespace Pr0gramm.API
             node.getValue_Object()["qc"] = new JsonNode(0);
             return new User(node, cookie);
         }
-        public async void Logout(UrlProvider urlProvider, Windows.Web.Http.HttpCookie cookie)
+        public async void Logout(ApiProvider apiProvider)
         {
             StringBuilder postDataBuilder = new StringBuilder();
             postDataBuilder.Append("id=" + WebUtility.UrlEncode(this.UserID));
             postDataBuilder.Append("&_nonce=" + WebUtility.UrlEncode(this._nonce));
-            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            filter.CookieManager.SetCookie(cookie);
-            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
-
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(urlProvider.UserAgent);
-            var response = await client.PostAsync(new Uri(urlProvider.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
+            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
             response.Dispose();
         }
 

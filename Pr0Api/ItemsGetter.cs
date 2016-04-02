@@ -12,7 +12,7 @@ namespace Pr0gramm.API
     public class ItemsGetter
     {
 
-        private ItemsGetter(asapJson.JsonNode node, ViewSource vs, UrlProvider url, Windows.Web.Http.HttpCookie cookie)
+        private ItemsGetter(asapJson.JsonNode node, ViewSource vs, ApiProvider apiProvider)
         {
             this.View = vs;
             this.AtEnd = node.getValue_Object()["atEnd"].getValue_Boolean();
@@ -26,8 +26,7 @@ namespace Pr0gramm.API
             this.Cache = node.getValue_Object()["cache"].getValue_String();
             this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
             this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();
-            this.Url = url;
-            this.Cookie = cookie;
+            this.Provider = apiProvider;
         }
 
         public bool AtEnd { get; private set; }
@@ -38,7 +37,7 @@ namespace Pr0gramm.API
         public long Rt { get; private set; }
         public DateTime Timestamp { get; private set; }
         public ViewSource View { get; private set; }
-        public UrlProvider Url { get; private set; }
+        public ApiProvider Provider { get; private set; }
         public HttpCookie Cookie { get; private set; }
 
         public async Task GetNewer(Action<List<Image>> callback)
@@ -48,14 +47,8 @@ namespace Pr0gramm.API
                 callback.Invoke(new List<Image>());
                 return;
             }
-            string fetchUrl = this.Url.Api + this.View.RequestPath + "&newer=" + this.Items.First().Id;
-            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            if (this.Cookie != null)
-                filter.CookieManager.SetCookie(this.Cookie);
-            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
-
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(this.Url.UserAgent);
-            var response = await client.GetAsync(new Uri(fetchUrl));
+            string fetchUrl = this.Provider.Api + this.View.RequestPath + "&newer=" + this.Items.First().Id;
+            var response = await Provider.Client.GetAsync(new Uri(fetchUrl));
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
             response.Dispose();
@@ -75,14 +68,8 @@ namespace Pr0gramm.API
                 callback.Invoke(new List<Image>());
                 return;
             }
-            string fetchUrl = this.Url.Api + this.View.RequestPath + "&older=" + this.Items.Last().Id;
-            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            if (this.Cookie != null)
-                filter.CookieManager.SetCookie(this.Cookie);
-            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
-
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(this.Url.UserAgent);
-            var response = await client.GetAsync(new Uri(fetchUrl));
+            string fetchUrl = this.Provider.Api + this.View.RequestPath + "&older=" + this.Items.Last().Id;
+            var response = await Provider.Client.GetAsync(new Uri(fetchUrl));
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
             response.Dispose();
@@ -96,20 +83,14 @@ namespace Pr0gramm.API
             callback.Invoke(newItems);
         }
 
-        public static async Task<ItemsGetter> Fetch(UrlProvider url, ViewSource vs, Windows.Web.Http.HttpCookie cookie = null)
+        public static async Task<ItemsGetter> Fetch(ApiProvider apiProvider, ViewSource vs)
         {
-            string fetchUrl = url.Api + vs.RequestPath;
-            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            if (cookie != null)
-                filter.CookieManager.SetCookie(cookie);
-            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
-
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(url.UserAgent);
-            var response = await client.GetAsync(new Uri(fetchUrl));
+            string fetchUrl = apiProvider.Api + vs.RequestPath;
+            var response = await apiProvider.Client.GetAsync(new Uri(fetchUrl));
 
             asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
             response.Dispose();
-            return new ItemsGetter(responseNode, vs, url, cookie);
+            return new ItemsGetter(responseNode, vs, apiProvider);
         }
     }
 }

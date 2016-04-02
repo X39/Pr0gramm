@@ -78,19 +78,11 @@ namespace Pr0gramm.API
         public long UserID { get; private set; }
         public long Username { get; private set; }
 
-        public async Task<Profile> Fetch(string profileName, UrlProvider urlProvider, Windows.Web.Http.HttpCookie cookie = null)
+        public async Task<Profile> Fetch(string profileName, ApiProvider apiProvider)
         {
-            string url = urlProvider.Api;
+            string url = apiProvider.Api;
             url += "profile/info?name=" + WebUtility.UrlEncode(profileName);
-
-            var filter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
-            if (cookie != null)
-                filter.CookieManager.SetCookie(cookie);
-            Windows.Web.Http.HttpClient client = new Windows.Web.Http.HttpClient(filter);
-
-            client.DefaultRequestHeaders.UserAgent.TryParseAdd(urlProvider.UserAgent);
-            var response = await client.GetAsync(new Uri(url));
-
+            var response = await apiProvider.Client.GetAsync(new Uri(url));
             asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
             response.Dispose();
             return new Profile(responseNode);
