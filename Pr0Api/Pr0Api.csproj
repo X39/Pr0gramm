@@ -108,21 +108,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\RateLimitReached.cs" />
-    <Compile Include="Items\Util\Image.cs" />
-    <Compile Include="Items\Util\ViewSource.cs" />
-    <Compile Include="Items\ItemsGetter.cs" />
-    <Compile Include="Item\ItemInfo.cs" />
-    <Compile Include="Profile\Profile.cs" />
-    <Compile Include="Profile\Util\Badge.cs" />
-    <Compile Include="Profile\Util\Mark.cs" />
-    <Compile Include="User\User.cs" />
+    <Compile Include="ItemInfo.cs" />
+    <Compile Include="ItemsGetter.cs" />
+    <Compile Include="ItemsGetterUtil\ViewSource.cs" />
+    <Compile Include="Profile.cs" />
+    <Compile Include="ProfileUtil\Badge.cs" />
+    <Compile Include="ProfileUtil\Mark.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="ItemsGetterUtil\Image.cs" />
     <Compile Include="Util\Message.cs" />
     <Compile Include="lib\asapJson\JsonNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlProvider.cs" />
     <EmbeddedResource Include="Properties\Pr0Api.rd.xml" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

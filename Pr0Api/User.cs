@@ -1,10 +1,4 @@
-﻿/*
-    /user
-    /user/login
-    /user/logout
-
-*/
-using System;
+﻿using System;
 using asapJson;
 using System.Threading.Tasks;
 using System.Net;
