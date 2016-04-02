@@ -8,6 +8,9 @@ using Windows.Web.Http.Filters;
 
 namespace Pr0gramm.API
 {
+    /// <summary>
+    /// Lifetime of this object has to be over the whole course of the application runtime
+    /// </summary>
     public class ApiProvider
     {
         public string Base { get { return UseHttps ? "https://pr0gramm.com/" : "http://pr0gramm.com/"; } }
@@ -16,7 +19,7 @@ namespace Pr0gramm.API
         public string Image { get { return UseHttps ? "https://img.pr0gramm.com/" : "http://img.pr0gramm.com/"; } }
         public string Full { get { return UseHttps ? "https://full.pr0gramm.com/" : "http://full.pr0gramm.com/"; } }
 
-        public bool UseHttps { get; private set; }
+        public bool UseHttps { get; set; }
         public string UserAgent { get; private set; }
         public HttpClient Client { get; private set; }
         public HttpBaseProtocolFilter Filter { get; private set; }
