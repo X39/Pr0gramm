@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid>
                     <!--="{StaticResource pr0_backnav}" PathHeight="18" PathMargin="5,5,5,5"-->
-                    <uc:Pr0Button x:Name="back" Text="Pr0" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4"/>
+                    <uc:Pr0Button PathData="{StaticResource pr0_logo}" PathHeight="24" PathMargin="0,0,0,0" x:Name="back" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4" Click="btnNew_Click"/>
                 </Grid>
                 <uc:Pr0Button x:Name="btnNew"  Text="{StaticResource str_NavPane_New}" Grid.Column="1" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4" Click="btnNew_Click"/>
                 <uc:Pr0Button x:Name="btnTop" Text="{StaticResource str_NavPane_Top}" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Margin="0" Padding="8,4,8,4" Click="btnTop_Click"/>
