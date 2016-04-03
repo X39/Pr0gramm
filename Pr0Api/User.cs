@@ -20,7 +20,7 @@ namespace Pr0gramm.API
 
         private User(JsonNode node, Windows.Web.Http.HttpCookie cookie)
         {
-            this.Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(node.getValue_Object()["ts"].getValue_Number());
+            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(node.getValue_Object()["ts"].getValue_Number());
             this.rt = (long)node.getValue_Object()["rt"].getValue_Number();
             this.qc = (long)node.getValue_Object()["qc"].getValue_Number();
             bool flag = false;
@@ -119,7 +119,7 @@ namespace Pr0gramm.API
             StringBuilder postDataBuilder = new StringBuilder();
             postDataBuilder.Append("id=" + WebUtility.UrlEncode(this.UserID));
             postDataBuilder.Append("&_nonce=" + WebUtility.UrlEncode(this._nonce));
-            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString()));
+            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString(), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/x-www-form-urlencoded"));
             response.Dispose();
         }
 
