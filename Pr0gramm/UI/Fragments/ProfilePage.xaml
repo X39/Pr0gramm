@@ -1,0 +1,99 @@
+﻿<Page
+    x:Class="Pr0gramm.UI.Fragments.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.UI.Fragments"
+    xmlns:uc="using:Pr0gramm.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource pr0_textColor}"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource pr0_grey}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0, 0, 0, 16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" x:Name="Username" Text="{StaticResource str_default}" Margin="0,0,8,0" FontSize="18"/>
+                <uc:Pr0Button Grid.Column="1" x:Name="StelzButton" Text="Stelzen" Padding="8, 0, 8, 0"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Width="Auto" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="BENIS" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="18"/>
+                        <TextBlock Grid.Column="1" x:Name="BenisLabel" Text="00000000000" FontSize="18"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" x:Name="Badges" Orientation="Horizontal" HorizontalAlignment="Right"/>
+                </Grid>
+                <TextBlock Grid.Row="1" x:Name="RegisteredLabel" Text="Gewachsen seit 00.Monat.0000 (X Jahre)" FontSize="10" Foreground="{StaticResource pr0_textColorGreyed}"/>
+            </Grid>
+            <Grid Grid.Row="3" Width="Auto" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Bilder" Foreground="{StaticResource pr0_textColorGreyed}"/>
+                    <TextBlock x:Name="UploadCountLabel" Text="{StaticResource str_default}" Margin="4,0,12,0"/>
+                    <TextBlock Text="Favoriten" Foreground="{StaticResource pr0_textColorGreyed}"/>
+                    <TextBlock x:Name="FavCountLabel" Text="{StaticResource str_default}" Margin="4,0,12,0"/>
+                    <TextBlock Text="Kommentare" Foreground="{StaticResource pr0_textColorGreyed}"/>
+                    <TextBlock x:Name="CommentCountLabel" Text="{StaticResource str_default}" Margin="4,0,12,0"/>
+                    <TextBlock Text="Tags" Foreground="{StaticResource pr0_textColorGreyed}"/>
+                    <TextBlock x:Name="TagCountLabel" Text="{StaticResource str_default}" Margin="4,0,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock x:Name="Rank" Text="{StaticResource str_default}" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Pivot Grid.Row="1">
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Bilder"/>
+                </PivotItem.Header>
+                <Frame x:Name="ImgFrame"/>
+            </PivotItem>
+            <PivotItem IsEnabled="False">
+                <PivotItem.Header>
+                    <TextBlock Text="Favoriten" Foreground="{StaticResource pr0_textColorGreyed}"/>
+                </PivotItem.Header>
+                <Frame x:Name="FavFrame"/>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="Kommentare"/>
+                </PivotItem.Header>
+                <Frame x:Name="CommentsFrame"/>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
