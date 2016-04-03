@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\RateLimitReached.cs" />
+    <Compile Include="inbox\Post.cs" />
     <Compile Include="ItemInfo.cs" />
     <Compile Include="ItemsGetter.cs" />
     <Compile Include="ItemsGetterUtil\ViewSource.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="ProfileUtil\Mark.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ItemsGetterUtil\Image.cs" />
+    <Compile Include="UserUtil\Sync.cs" />
     <Compile Include="Util\Message.cs" />
     <Compile Include="lib\asapJson\JsonNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
