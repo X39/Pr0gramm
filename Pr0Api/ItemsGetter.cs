@@ -20,7 +20,7 @@ namespace Pr0gramm.API
             {
                 this.Items.Add(new Image(it));
             }
-            this.Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(node.getValue_Object()["ts"].getValue_Number());
+            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(node.getValue_Object()["ts"].getValue_Number());
             this.Cache = node.getValue_Object()["cache"].getValue_String();
             this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
             this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();

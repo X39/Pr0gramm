@@ -16,7 +16,7 @@ namespace Pr0gramm.API
             tmpNode = node.getValue_Object()["user"];
             this.UserID = (long)tmpNode.getValue_Object()["id"].getValue_Number();
             this.Username = (long)tmpNode.getValue_Object()["name"].getValue_Number();
-            this.Registered = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(tmpNode.getValue_Object()["registered"].getValue_Number());
+            this.Registered = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Object()["registered"].getValue_Number());
             this.Score = (long)tmpNode.getValue_Object()["score"].getValue_Number();
             this.MarkObj = new API.ProfileUtil.Mark((int)tmpNode.getValue_Object()["score"].getValue_Number());
             this.IsAdmin = tmpNode.getValue_Object()["admin"].getValue_Boolean();
@@ -25,14 +25,14 @@ namespace Pr0gramm.API
             this.LikeCount = (long)node.getValue_Object()["likeCount"].getValue_Number();
             this.TagCount = (long)node.getValue_Object()["tagCount"].getValue_Number();
             this.FollowCount = (long)node.getValue_Object()["followCount"].getValue_Number();
-            this.Timestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(tmpNode.getValue_Object()["ts"].getValue_Number());
+            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Object()["ts"].getValue_Number());
             this.Following = node.getValue_Object()["following"].getValue_Boolean();
             //this.Cache = node.getValue_Object()["cache"];
             this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
             this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();
 
             if (tmpNode.getValue_Object().ContainsKey("bannedUntil") && tmpNode.getValue_Object()["bannedUntil"].Type != JsonNode.EJType.Object)
-                this.BannedUntil = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(tmpNode.getValue_Number());
+                this.BannedUntil = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Number());
 
             tmpNode = node.getValue_Object()["comments"];
             this.Comments = new List<API.Util.Message>();

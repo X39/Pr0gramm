@@ -9,7 +9,7 @@ namespace Pr0gramm.API.ProfileUtil
             this.Link = sourceNode.getValue_Object()["link"].getValue_String();
             this.Image = sourceNode.getValue_Object()["image"].getValue_String();
             this.Description = sourceNode.getValue_Object()["description"].getValue_String();
-            this.Created = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(sourceNode.getValue_Object()["created"].getValue_Number());
+            this.Created = ApiProvider.UnixTimestamp0.AddSeconds(sourceNode.getValue_Object()["created"].getValue_Number());
         }
 
         public DateTime Created { get; private set; }

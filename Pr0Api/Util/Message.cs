@@ -23,7 +23,7 @@ namespace Pr0gramm.API.Util
             this.Up = (long)souceNode.getValue_Object()["up"].getValue_Number();
             this.Down = (long)souceNode.getValue_Object()["down"].getValue_Number();
             this.Content = souceNode.getValue_Object()["content"].getValue_String();
-            this.Created = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(souceNode.getValue_Object()["created"].getValue_Number());
+            this.Created = ApiProvider.UnixTimestamp0.AddSeconds(souceNode.getValue_Object()["created"].getValue_Number());
 
             //Only for ItemInfo messages
             this.Parent = souceNode.getValue_Object().ContainsKey("parent") ? (long)souceNode.getValue_Object()["parent"].getValue_Number() : 0;
