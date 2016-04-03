@@ -14,7 +14,7 @@ namespace Pr0gramm.API.inbox
 
         }
 
-        public static async Task<bool> SendMessage(string content, Profile receiver, User user, ApiProvider apiProvider
+        public static async Task<bool> SendMessage(string content, Profile receiver, User user, ApiProvider apiProvider)
         {
             StringBuilder postDataBuilder = new StringBuilder();
             postDataBuilder.Append("comment="); postDataBuilder.Append(WebUtility.UrlEncode(content));
