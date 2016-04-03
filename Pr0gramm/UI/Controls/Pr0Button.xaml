@@ -29,22 +29,6 @@
                             <Grid>
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Toggled">
-                                            <VisualState.StateTriggers>
-                                                <StateTrigger IsActive="{Binding ToggledProperty, ElementName=Pr0ButtonXaml}"/>
-                                            </VisualState.StateTriggers>
-                                            <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_zomfg}" />
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_textColor}" />
-                                                </ObjectAnimationUsingKeyFrames>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonPath" Storyboard.TargetProperty="Fill">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_textColor}" />
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </VisualState>
                                         <VisualState x:Name="Normal">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
