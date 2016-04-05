@@ -19,11 +19,53 @@ namespace Pr0gramm.API.Util
 
         public Message(asapJson.JsonNode souceNode)
         {
-            this.Id = (long)souceNode.getValue_Object()["id"].getValue_Number();
-            this.Up = (long)souceNode.getValue_Object()["up"].getValue_Number();
-            this.Down = (long)souceNode.getValue_Object()["down"].getValue_Number();
+            //api call profile/info has a bug for messages which causes all numbers to be strings ...
+            //that is why this weirdo casting has to happen for the generic message object
+
+            asapJson.JsonNode tmpNode;
+            double tmpVal;
+
+            tmpNode = souceNode.getValue_Object()["id"];
+            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
+                this.Id = (long)tmpNode.getValue_Number();
+            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
+            {
+                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
+                    this.Id = (long)tmpVal;
+                else
+                    this.Id = -1;
+            }
+            tmpNode = souceNode.getValue_Object()["up"];
+            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
+                this.Up = (long)tmpNode.getValue_Number();
+            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
+            {
+                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
+                    this.Up = (long)tmpVal;
+                else
+                    this.Up = -1;
+            }
+            tmpNode = souceNode.getValue_Object()["down"];
+            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
+                this.Down = (long)tmpNode.getValue_Number();
+            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
+            {
+                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
+                    this.Down = (long)tmpVal;
+                else
+                    this.Down = -1;
+            }
             this.Content = souceNode.getValue_Object()["content"].getValue_String();
-            this.Created = ApiProvider.UnixTimestamp0.AddSeconds(souceNode.getValue_Object()["created"].getValue_Number());
+            tmpNode = souceNode.getValue_Object()["created"];
+            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
+                this.Created = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Number());
+            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
+            {
+                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
+                    this.Created = ApiProvider.UnixTimestamp0.AddSeconds(tmpVal);
+                else
+                    this.Created = ApiProvider.UnixTimestamp0;
+            }
 
             //Only for ItemInfo messages
             this.Parent = souceNode.getValue_Object().ContainsKey("parent") ? (long)souceNode.getValue_Object()["parent"].getValue_Number() : 0;
@@ -33,7 +75,23 @@ namespace Pr0gramm.API.Util
 
             //Only for Profile messages
             this.Thumb = souceNode.getValue_Object().ContainsKey("thumb") ? souceNode.getValue_Object()["thumb"].getValue_String() : "";
-            this.ItemId = souceNode.getValue_Object().ContainsKey("itemId") ? (long)souceNode.getValue_Object()["itemId"].getValue_Number() : 0;
+            if(souceNode.getValue_Object().ContainsKey("itemId"))
+            {
+                tmpNode = souceNode.getValue_Object()["itemId"];
+                if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
+                    this.ItemId = (long)tmpNode.getValue_Number();
+                else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
+                {
+                    if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
+                        this.ItemId = (long)tmpVal;
+                    else
+                        this.ItemId = -1;
+                }
+            }
+            else
+            {
+                this.ItemId = 0;
+            }
         }
     }
 }
