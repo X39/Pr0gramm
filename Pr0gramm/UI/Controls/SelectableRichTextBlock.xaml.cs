@@ -32,6 +32,8 @@ namespace Pr0gramm.UI.Controls
         }
         private void parseIntoComment(string content)
         {
+            //ToDo: Fix the broken link highlighting ...
+
             //DO NOT ASK WHY ... WinRT is love :facepalm:
             //thx to you Jason Jarrett ... http://elegantcode.com/2013/03/19/richeditbox-gives-unauthorizedaccessexception-access-is-denied-error-when-settext-called/
             this.ContentElement.IsReadOnly = false;
