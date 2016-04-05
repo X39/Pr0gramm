@@ -43,7 +43,7 @@
                         <Border Visibility="Visible" x:Name="isOpElement" Background="{StaticResource pr0_orange}" CornerRadius="3" Padding="3,0,3,0" Margin="0,0,5,0">
                             <TextBlock Text="OP" Foreground="{StaticResource pr0_textColor}"/>
                         </Border>
-                        <TextBlock x:Name="AuthorElement" Text="USERNAME" Foreground="{StaticResource pr0_textColor}" Height="Auto"/>
+                        <uc:Pr0Button x:Name="AuthorButton" Text="{StaticResource str_default}" Margin="0" Padding="0" Background="Transparent" Foreground="{StaticResource pr0_textColor}" Click="AuthorButton_Click"/>
                         <Ellipse x:Name="AuthorRank" Width="5" Height="5" Fill="White" Margin="5,0,5,0"/>
                         <TextBlock x:Name="Created" Text="DATE" Foreground="{StaticResource pr0_textColor}" Margin="5,0,5,0"/>
                         <uc:Pr0Button PathData="{StaticResource pr0_reply}" PathHeight="8" PathMargin="0,0,5,0" Text="{StaticResource str_Reply}" Padding="8,0"/>

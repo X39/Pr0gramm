@@ -15,7 +15,7 @@ namespace Pr0gramm.UI.Controls
             this.InitializeComponent();
             this.CommentInfo = comment;
             this.CommentElement.Text = comment.Content;
-            this.AuthorElement.Text = comment.Author;
+            this.AuthorButton.Text = comment.Author;
             foreach (var it in comment.Children)
             {
                 this.ChildrensStack.Children.Add(new UserComment(it));
@@ -29,6 +29,18 @@ namespace Pr0gramm.UI.Controls
         private void CommentElement_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private async void AuthorButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(sender is Pr0Button)
+            {
+                Pr0Button btn = sender as Pr0Button;
+                var profile = await API.Profile.Fetch(btn.Text, app.Settings.Instance.APIProvider);
+                var mp = (Window.Current.Content as Frame).Content as Pages.MainPage;
+                mp.clearToggleStates();
+                mp.ContentFrame.Navigate(typeof(Fragments.ProfilePage), profile);
+            }
         }
     }
 }
