@@ -113,6 +113,7 @@
     <Compile Include="ItemsGetter.cs" />
     <Compile Include="ItemsGetterUtil\ViewSource.cs" />
     <Compile Include="Profile.cs" />
+    <Compile Include="ProfileUtil\ImgLink.cs" />
     <Compile Include="ProfileUtil\Badge.cs" />
     <Compile Include="ProfileUtil\Mark.cs" />
     <Compile Include="User.cs" />
