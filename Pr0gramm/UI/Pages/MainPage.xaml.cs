@@ -37,7 +37,7 @@ namespace Pr0gramm.UI.Pages
             this.Footer.Children.Add(versionTextBlock);
         }
 
-        private void clearToggleStates()
+        public void clearToggleStates()
         {
             btnNew.Toggled = false;
             btnTop.Toggled = false;
@@ -86,7 +86,7 @@ namespace Pr0gramm.UI.Pages
 
             if (app.Settings.Instance.Pr0User == null)
             {
-              this.ContentFrame.Navigate(typeof(Fragments.LoginView));
+                this.ContentFrame.Navigate(typeof(Fragments.LoginView));
             }
             else
             {

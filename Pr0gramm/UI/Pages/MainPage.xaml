@@ -61,7 +61,7 @@
                 <uc:Pr0Button x:Name="btnSettings" PathData="{StaticResource pr0_settings}" PathHeight="18" PathMargin="5,5,5,5" Text="" Grid.Column="2" Height="Auto" VerticalAlignment="Stretch" Padding="8,4,8,4" Click="btnSettings_Click"/>
             </Grid>
         </Grid>
-        <Frame x:Name="ContentFrame" Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Frame x:FieldModifier="public" x:Name="ContentFrame" Grid.Row="1" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         <StackPanel x:Name="Footer" Background="{StaticResource pr0_lightGrey}" Grid.Row="2" Orientation="Horizontal">
             <TextBlock Grid.Column="1" Foreground="{StaticResource pr0_orange}" VerticalAlignment="Center">Mit &lt;3 gemacht!</TextBlock>
         </StackPanel>
