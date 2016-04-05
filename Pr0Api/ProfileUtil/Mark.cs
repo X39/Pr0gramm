@@ -71,5 +71,33 @@ namespace Pr0gramm.API.ProfileUtil
                 }
             }
         }
+        public override string ToString()
+        {
+            switch (this.RankId)
+            {
+                case 0: //Neutral Fagg0t
+                    return "SCHWUCHTEL";
+                case 1: //Newfag
+                    return "NEUSCHWUCHTEL";
+                case 2: //Oldfag
+                    return "ALTSCHWUCHTEL";
+                case 3: //Admin
+                    return "ADMIN";
+                case 4: //Banned
+                    return "BANNED";
+                case 5: //Moderator
+                    return "MODERATOR";
+                case 6: //Fliesentisch
+                    return "FLIESENTISCHBESITZER";
+                case 7: //Lebende Legende
+                    return "LEBENDE LEGENDE";
+                case 8: //Wichtel
+                    return "WICHTEL";
+                case 9: //Edler Spender
+                    return "EDLER SPENDER";
+                default:
+                    return "UNBEKANNT";
+            }
+        }
     }
 }
