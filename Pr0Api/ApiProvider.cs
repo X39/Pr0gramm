@@ -13,7 +13,7 @@ namespace Pr0gramm.API
     /// </summary>
     public class ApiProvider
     {
-        internal static readonly DateTime UnixTimestamp0 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        public static readonly DateTime UnixTimestamp0 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public string Base { get { return UseHttps ? "https://pr0gramm.com/" : "http://pr0gramm.com/"; } }
         public string Api { get { return UseHttps ? "https://pr0gramm.com/api/" : "http://pr0gramm.com/api/"; } }
         public string Thumb { get { return UseHttps ? "https://thumb.pr0gramm.com/" : "http://thumb.pr0gramm.com/"; } }
