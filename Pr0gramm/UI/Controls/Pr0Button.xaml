@@ -8,12 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    x:Name="Pr0ButtonXaml">
+    x:Name="Pr0ButtonXaml" Background="{StaticResource pr0_orange}">
 
-    <ToggleButton x:Name="btn" Width="Auto" Checked="btn_CheckedChanged" Unchecked="btn_CheckedChanged" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Text, Mode=OneWay}" Click="btn_Click" Padding="{Binding Padding, ElementName=Pr0ButtonXaml}" IsChecked="{Binding Toggled, ElementName=Pr0ButtonXaml}">
+    <ToggleButton x:Name="btn" Width="Auto" Background="{Binding Background, ElementName=Pr0ButtonXaml}" Checked="btn_CheckedChanged" Unchecked="btn_CheckedChanged" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{x:Bind Text, Mode=OneWay}" Click="btn_Click" Padding="{Binding Padding, ElementName=Pr0ButtonXaml}" IsChecked="{Binding Toggled, ElementName=Pr0ButtonXaml}">
         <ToggleButton.Style>
             <Style TargetType="ToggleButton">
-                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}" />
                 <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}" />
                 <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
@@ -32,7 +31,7 @@
                                         <VisualState x:Name="Normal">
                                             <Storyboard>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Border" Storyboard.TargetProperty="Background">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_orange}" />
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{Binding Background, ElementName=btn}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                                     <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource pr0_textColor}" />
