@@ -49,7 +49,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="BENIS" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="18"/>
-                        <TextBlock Grid.Column="1" x:Name="BenisLabel" Text="00000000000" FontSize="18"/>
+                        <TextBlock Grid.Column="1" x:Name="BenisLabel" Text="00000000000" FontSize="18" Margin="8,0,8,0"/>
                     </Grid>
                     <StackPanel Grid.Column="1" x:Name="Badges" Orientation="Horizontal" HorizontalAlignment="Right"/>
                 </Grid>
@@ -71,7 +71,8 @@
                     <TextBlock x:Name="TagCountLabel" Text="{StaticResource str_default}" Margin="4,0,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock x:Name="Rank" Text="{StaticResource str_default}" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="RankLabel" Text="{StaticResource str_default}" HorizontalAlignment="Right"/>
+                    <Ellipse x:Name="RankCircle" Width="5" Height="5" Fill="White" Margin="5,0,5,0"/>
                 </StackPanel>
             </Grid>
         </Grid>
