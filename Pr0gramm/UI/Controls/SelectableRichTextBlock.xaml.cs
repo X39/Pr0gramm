@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Documents;
+using System.Collections.Generic;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -10,7 +11,18 @@ namespace Pr0gramm.UI.Controls
 {
     public sealed partial class SelectableRichTextBlock : UserControl
     {
-        public event EventHandler<Uri> LinkClicked;
+        public class LinkClickedEventArgs : EventArgs
+        {
+            public bool Handled { get; set; }
+            public Uri URI { get; private set; }
+            public LinkClickedEventArgs(Uri uri)
+            {
+                this.URI = uri;
+                this.Handled = false;
+            }
+        }
+        public event EventHandler<LinkClickedEventArgs> LinkClicked;
+        private Dictionary<Hyperlink, Uri> HyperlinkRegister;
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(string), new PropertyMetadata(default(string)));
         public string Text
@@ -20,6 +32,7 @@ namespace Pr0gramm.UI.Controls
         }
         public SelectableRichTextBlock()
         {
+            HyperlinkRegister = new Dictionary<Hyperlink, Uri>();
             this.InitializeComponent();
         }
         private void parseIntoComment(string content)
@@ -68,21 +81,28 @@ namespace Pr0gramm.UI.Controls
 
                 Hyperlink lnk = new Hyperlink();
                 lnk.Inlines.Add(new Run { Text = linkText });
-                lnk.NavigateUri = new Uri(link);
+                HyperlinkRegister[lnk] = new Uri(link);
                 lnk.Foreground = Application.Current.Resources["pr0_orange"] as SolidColorBrush;
                 lnk.Click += (sender, e) =>
                 {
+                    sender.NavigateUri = null;
+                    var uri = HyperlinkRegister[sender];
+                    var args = new LinkClickedEventArgs(uri);
                     if (this.LinkClicked != null)
                     {
-                        this.LinkClicked(lnk, lnk.NavigateUri);
+                        this.LinkClicked(sender, args);
+                    }
+                    if (!args.Handled)
+                    {
+                        sender.NavigateUri = uri;
                     }
                 };
                 {
                     Paragraph p = new Paragraph();
                     p.Inlines.Add(lnk);
                     this.ContentElement.Blocks.Add(p);
-                    lastIndex = indexEnd;
                 }
+                lastIndex = indexEnd;
             } while (true);
         }
     }
