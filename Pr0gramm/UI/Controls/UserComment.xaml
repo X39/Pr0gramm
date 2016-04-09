@@ -10,32 +10,35 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Border BorderThickness="2, 0, 0, 2" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="0, 0, 0, 2">
-        <Grid Margin="0, 0, 0, 2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="32"/>
-                    <ColumnDefinition Width="5"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="2"/>
-                        <RowDefinition Height="20"/>
-                    </Grid.RowDefinitions>
-                    <uc:Pr0Button x:Name="btnVoteItemPlus" PathData="{StaticResource pr0_upVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <uc:Pr0Button x:Name="btnVoteItemMinus" PathData="{StaticResource pr0_downVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Grid>
-                <Grid Grid.Column="3">
+    <Grid Margin="0, 0, 0, 2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <uc:Pr0Button x:Name="btnVoteItemPlus" PathData="{StaticResource pr0_upVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <uc:Pr0Button x:Name="btnVoteItemMinus" PathData="{StaticResource pr0_downVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <Border Grid.Column="3" BorderThickness="0, 0, 0, 1" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="0, 0, 0, 5" Width="Auto" HorizontalAlignment="Stretch" Padding="0,0,0,3">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
                     <!--<TextBlock x:Name="CommentElement" Grid.Row="0" Text="ERR0R" Foreground="{StaticResource pr0_textColor}"/>-->
                     <!--<RichEditBox x:Name="CommentElement" Grid.Row="0" Foreground="{StaticResource pr0_textColor}" BorderThickness="0" Background="Transparent" IsReadOnly="True"/>-->
                     <uc:SelectableRichTextBlock x:Name="CommentElement" Grid.Row="0" Foreground="{StaticResource pr0_textColor}" BorderThickness="0" Background="Transparent"/>
@@ -49,8 +52,10 @@
                         <uc:Pr0Button PathData="{StaticResource pr0_reply}" PathHeight="8" PathMargin="0,0,5,0" Text="{StaticResource str_Reply}" Padding="8,0"/>
                     </StackPanel>
                 </Grid>
-            </Grid>
-            <StackPanel Grid.Row="1" x:Name="ChildrensStack" x:FieldModifier="public" Orientation="Vertical" Margin="3, 4, 0, 0"/>
+            </Border>
         </Grid>
-    </Border>
+        <Border Grid.Row="1" BorderThickness="1, 0, 0, 0" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="17, 0, 0, 16">
+            <StackPanel  x:Name="ChildrensStack" x:FieldModifier="public" Orientation="Vertical"/>
+        </Border>
+    </Grid>
 </UserControl>
