@@ -1,4 +1,6 @@
-﻿namespace Pr0gramm.API.ItemsGetterUtil
+﻿using System;
+
+namespace Pr0gramm.API.ItemsGetterUtil
 {
     public class Image
     {
@@ -9,7 +11,7 @@
             this.Promoted = (long)sourceNode.getValue_Object()["promoted"].getValue_Number();
             this.Up = (long)sourceNode.getValue_Object()["up"].getValue_Number();
             this.Down = (long)sourceNode.getValue_Object()["down"].getValue_Number();
-            this.Created = (long)sourceNode.getValue_Object()["created"].getValue_Number();
+            this.Created = ApiProvider.UnixTimestamp0.AddSeconds(sourceNode.getValue_Object()["created"].getValue_Number());
             this.ImagePath = sourceNode.getValue_Object()["image"].getValue_String();
             this.Thumb = sourceNode.getValue_Object()["thumb"].getValue_String();
             this.Fullsize = sourceNode.getValue_Object()["fullsize"].getValue_String();
@@ -19,7 +21,7 @@
             this.Mark = (long)sourceNode.getValue_Object()["mark"].getValue_Number();
         }
 
-        public long Created { get; private set; }
+        public DateTime Created { get; private set; }
         public long Down { get; private set; }
         public long Flags { get; private set; }
         public string Fullsize { get; private set; }
