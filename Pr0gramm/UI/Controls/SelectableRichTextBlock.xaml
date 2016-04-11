@@ -9,6 +9,6 @@
     d:DesignHeight="300"
     d:DesignWidth="400" x:Name="SelectableRichTextBlockXaml">
     <Border Background="{Binding Background, ElementName=SelectableRichTextBlockXaml}">
-        <RichTextBlock x:Name="ContentElement" Foreground="{Binding Foreground, ElementName=SelectableRichTextBlockXaml}"/>
+        <RichTextBlock x:Name="ContentElement" Foreground="{Binding Foreground, ElementName=SelectableRichTextBlockXaml}" TextWrapping="WrapWholeWords"/>
     </Border>
 </UserControl>
