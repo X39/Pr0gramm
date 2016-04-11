@@ -30,9 +30,11 @@ namespace Pr0gramm.UI.Controls
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); parseIntoComment(value); }
         }
+        public List<Func<string, int, Tuple<int, string, string>>> CustomHandlers { get; private set; }
         public SelectableRichTextBlock()
         {
             HyperlinkRegister = new Dictionary<Hyperlink, Uri>();
+            CustomHandlers = new List<Func<string, int, Tuple<int, string, string>>>();
             this.InitializeComponent();
         }
         private void parseIntoComment(string content)
@@ -42,6 +44,10 @@ namespace Pr0gramm.UI.Controls
             int lastIndex = 0;
             do
             {
+                foreach(var fnc in this.CustomHandlers)
+                {
+                    fnc.Invoke(content, lastIndex);
+                }
                 index = content.IndexOf(linkPrefixes[0], lastIndex);
                 int index2 = content.IndexOf(linkPrefixes[1], lastIndex);
                 string currentPrefix;
@@ -56,11 +62,14 @@ namespace Pr0gramm.UI.Controls
                 }
                 if (index < 0)
                 {
-                    Span span = new Span();
-                    span.Inlines.Add(new Run { Text = content.Substring(lastIndex) });
-                    Paragraph p = new Paragraph();
-                    p.Inlines.Add(span);
-                    this.ContentElement.Blocks.Add(p);
+                    if (content.Length != lastIndex)
+                    {
+                        Span span = new Span();
+                        span.Inlines.Add(new Run { Text = content.Substring(lastIndex) });
+                        Paragraph p = new Paragraph();
+                        p.Inlines.Add(span);
+                        this.ContentElement.Blocks.Add(p);
+                    }
                     break;
                 }
                 else if (index > 0)
