@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Pr0gramm.UI.Controls;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Pr0gramm.UI.Fragments
@@ -44,6 +45,8 @@ namespace Pr0gramm.UI.Fragments
                 this.LabelVotes.Text = (this.Source.Up - this.Source.Down).ToString();
                 this.LabelVotesUp.Text = "up: " + this.Source.Up;
                 this.LabelVotesDown.Text = "down: " + this.Source.Down;
+                this.AuthorButton.Text = this.Source.User;
+                this.AuthorRank.Fill = this.Source.UserMark.Color;
 
 
                 foreach (var it in this.Info.Comments)
@@ -83,6 +86,18 @@ namespace Pr0gramm.UI.Fragments
         private void PointerPressed_EmptyHandled(object sender, PointerRoutedEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private async void AuthorButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Pr0Button)
+            {
+                Pr0Button btn = sender as Pr0Button;
+                var profile = await API.Profile.Fetch(btn.Text, app.Settings.Instance.APIProvider);
+                var mp = (Window.Current.Content as Frame).Content as Pages.MainPage;
+                mp.clearToggleStates();
+                mp.ContentFrame.Navigate(typeof(Fragments.ProfilePage), profile);
+            }
         }
     }
 }
