@@ -49,7 +49,7 @@ namespace Pr0gramm.UI.Pages
         {
             clearToggleStates();
             btnNew.Toggled = true;
-            this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.New));
+            this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new API.ItemsGetterUtil.ViewSource(API.ItemsGetterUtil.ViewSource.ViewType.New));
         }
 
         private void applyTitleBarTheme()
@@ -68,7 +68,7 @@ namespace Pr0gramm.UI.Pages
         {
             clearToggleStates();
             btnTop.Toggled = true;
-            this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new Fragments.ContentPresenter.ViewSource(Fragments.ContentPresenter.ViewSource.ViewType.Top));
+            this.ContentFrame.Navigate(typeof(Fragments.ContentPresenter), new API.ItemsGetterUtil.ViewSource(API.ItemsGetterUtil.ViewSource.ViewType.Top));
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)

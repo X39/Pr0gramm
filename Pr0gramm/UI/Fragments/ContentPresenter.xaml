@@ -8,7 +8,7 @@
     mc:Ignorable="d">
     <Grid>
         <Border Background="{StaticResource pr0_grey}">
-            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto">
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" ViewChanged="ScrollViewer_ViewChanged">
                 <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Center" Margin="32,0,32,0" x:Name="Presenter" ItemWidth="133" ItemHeight="131"/>
             </ScrollViewer>
         </Border>
