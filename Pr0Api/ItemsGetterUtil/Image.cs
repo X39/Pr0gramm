@@ -18,7 +18,8 @@ namespace Pr0gramm.API.ItemsGetterUtil
             this.Source = sourceNode.getValue_Object()["source"].getValue_String();
             this.Flags = (long)sourceNode.getValue_Object()["flags"].getValue_Number();
             this.User = sourceNode.getValue_Object()["user"].getValue_String();
-            this.Mark = (long)sourceNode.getValue_Object()["mark"].getValue_Number();
+            
+            this.UserMark = new API.ProfileUtil.Mark((int)sourceNode.getValue_Object()["mark"].getValue_Number());
         }
 
         public DateTime Created { get; private set; }
@@ -27,7 +28,7 @@ namespace Pr0gramm.API.ItemsGetterUtil
         public string Fullsize { get; private set; }
         public long Id { get; private set; }
         public string ImagePath { get; private set; }
-        public long Mark { get; private set; }
+        public API.ProfileUtil.Mark UserMark { get; private set; }
         public long Promoted { get; private set; }
         public string Source { get; private set; }
         public string Thumb { get; private set; }
