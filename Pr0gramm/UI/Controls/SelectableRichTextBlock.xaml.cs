@@ -75,7 +75,7 @@ namespace Pr0gramm.UI.Controls
                 else if (index > 0)
                 {
                     Span span = new Span();
-                    span.Inlines.Add(new Run { Text = content.Substring(lastIndex, index) });
+                    span.Inlines.Add(new Run { Text = content.Substring(lastIndex, index - lastIndex) });
 
                     Paragraph p = new Paragraph();
                     p.Inlines.Add(span);
