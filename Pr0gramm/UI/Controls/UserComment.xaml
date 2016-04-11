@@ -54,7 +54,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <Border Grid.Row="1" BorderThickness="1, 0, 0, 0" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="17, 0, 0, 16">
+        <Border Grid.Row="1" BorderThickness="1, 0, 0, 0" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="17, 0, 0, 0">
             <StackPanel  x:Name="ChildrensStack" x:FieldModifier="public" Orientation="Vertical"/>
         </Border>
     </Grid>

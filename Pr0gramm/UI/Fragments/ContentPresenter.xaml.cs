@@ -91,7 +91,7 @@ namespace Pr0gramm.UI.Fragments
                 if ((await ApiContent.GetNewer()).Count > 0)
                     UpdatePresentedContent();
             }
-            else if(sv.VerticalOffset == sv.ScrollableHeight)
+            else if(sv.ScrollableHeight > 256 && sv.VerticalOffset >= sv.ScrollableHeight - 256)
             {
                 //Fetch older
                 if((await ApiContent.GetOlder()).Count > 0)
