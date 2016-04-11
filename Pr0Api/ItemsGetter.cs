@@ -38,12 +38,11 @@ namespace Pr0gramm.API
         public ApiProvider Provider { get; private set; }
         public HttpCookie Cookie { get; private set; }
 
-        public async Task GetNewer(Action<List<Image>> callback)
+        public async Task<List<Image>> GetNewer()
         {
             if (this.AtStart)
             {
-                callback.Invoke(new List<Image>());
-                return;
+                return new List<Image>();
             }
             string fetchUrl = this.Provider.Api + this.View.RequestPath + "&newer=" + this.Items.First().Id;
             var response = await Provider.Client.GetAsync(new Uri(fetchUrl));
@@ -57,14 +56,13 @@ namespace Pr0gramm.API
                 newItems.Add(new Image(it));
             }
             this.Items.InsertRange(0, newItems);
-            callback.Invoke(newItems);
+            return newItems;
         }
-        public async Task GetOlder(Action<List<Image>> callback)
+        public async Task<List<Image>> GetOlder()
         {
-            if (this.AtStart)
+            if (this.AtEnd)
             {
-                callback.Invoke(new List<Image>());
-                return;
+                return new List<Image>();
             }
             string fetchUrl = this.Provider.Api + this.View.RequestPath + "&older=" + this.Items.Last().Id;
             var response = await Provider.Client.GetAsync(new Uri(fetchUrl));
@@ -78,7 +76,7 @@ namespace Pr0gramm.API
                 newItems.Add(new Image(it));
             }
             this.Items.AddRange(newItems);
-            callback.Invoke(newItems);
+            return newItems;
         }
 
         public static async Task<ItemsGetter> Fetch(ApiProvider apiProvider, ViewSource vs)
