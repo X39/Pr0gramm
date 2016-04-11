@@ -11,7 +11,7 @@
     <Grid Background="#3F161618" x:Name="MainGrid" PointerPressed="MainGrid_PointerPressed">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*" MinWidth="512"/>
+            <ColumnDefinition Width="4*" MinWidth="500"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="1" Background="{StaticResource pr0_grey}" PointerPressed="PointerPressed_EmptyHandled" IsHitTestVisible="True">
