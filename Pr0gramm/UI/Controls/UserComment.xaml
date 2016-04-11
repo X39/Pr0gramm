@@ -1,0 +1,61 @@
+﻿<UserControl
+    x:Class="Pr0gramm.UI.Controls.UserComment"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.UI.Controls"
+    xmlns:uc="using:Pr0gramm.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Margin="0, 0, 0, 2" Width="Auto" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Width="Auto" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <uc:Pr0Button x:Name="btnVoteItemPlus" PathData="{StaticResource pr0_upVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <uc:Pr0Button x:Name="btnVoteItemMinus" PathData="{StaticResource pr0_downVote}" PathHeight="16" PathMargin="2,2,2,2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <Border Grid.Column="3" BorderThickness="0, 0, 0, 1" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="0, 0, 0, 5" Width="Auto" HorizontalAlignment="Stretch" Padding="0,0,0,3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!--<TextBlock x:Name="CommentElement" Grid.Row="0" Text="ERR0R" Foreground="{StaticResource pr0_textColor}"/>-->
+                    <!--<RichEditBox x:Name="CommentElement" Grid.Row="0" Foreground="{StaticResource pr0_textColor}" BorderThickness="0" Background="Transparent" IsReadOnly="True"/>-->
+                    <uc:SelectableRichTextBlock x:Name="CommentElement" Grid.Row="0" Foreground="{StaticResource pr0_textColor}" BorderThickness="0" Background="Transparent"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Border Visibility="Visible" x:Name="isOpElement" Background="{StaticResource pr0_orange}" CornerRadius="3" Padding="3,0,3,0" Margin="0,0,5,0">
+                            <TextBlock Text="OP" Foreground="{StaticResource pr0_textColor}"/>
+                        </Border>
+                        <uc:Pr0Button x:Name="AuthorButton" Text="{StaticResource str_default}" Margin="0" Padding="0" Background="Transparent" Foreground="{StaticResource pr0_textColor}" Click="AuthorButton_Click"/>
+                        <Ellipse x:Name="AuthorRank" Width="5" Height="5" Fill="White" Margin="5,0,5,0"/>
+                        <TextBlock x:Name="Created" Text="DATE" Foreground="{StaticResource pr0_textColor}" Margin="5,0,5,0"/>
+                        <uc:Pr0Button PathData="{StaticResource pr0_reply}" PathHeight="8" PathMargin="0,0,5,0" Text="{StaticResource str_Reply}" Padding="8,0"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <Border Grid.Row="1" BorderThickness="1, 0, 0, 0" BorderBrush="{StaticResource pr0_lighterGrey}" Margin="17, 0, 0, 0">
+            <StackPanel  x:Name="ChildrensStack" x:FieldModifier="public" Orientation="Vertical"/>
+        </Border>
+    </Grid>
+</UserControl>

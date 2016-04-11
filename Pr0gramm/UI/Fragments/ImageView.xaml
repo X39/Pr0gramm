@@ -1,0 +1,98 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Class="Pr0gramm.UI.Fragments.ImageView"
+    xmlns:local="using:Pr0gramm.UI.Fragments"
+    xmlns:uc="using:Pr0gramm.UI.Controls"
+    mc:Ignorable="d" Width="Auto">
+
+    <Grid Background="#3F161618" x:Name="MainGrid" PointerPressed="MainGrid_PointerPressed">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*" MinWidth="500"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Background="{StaticResource pr0_grey}" PointerPressed="PointerPressed_EmptyHandled" IsHitTestVisible="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="37"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0">
+                    <Grid Background="{StaticResource pr0_grey}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" MaxHeight="{Binding ActualHeight, ElementName=MainGrid}"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="CurrentImage" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Height="Auto" Margin="0,5,0,15"/>
+                        <StackPanel Grid.Row="1">
+                            <Grid Height="78">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5, 0, 0, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="5"/>
+                                            <ColumnDefinition Width="64"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" VerticalAlignment="Center">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="5"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <uc:Pr0Button x:Name="btnVoteItemPlus" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" PathData="{StaticResource pr0_upVote}" PathHeight="16" PathMargin="2,2,2,2"/>
+                                            <uc:Pr0Button x:Name="btnVoteItemMinus"  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" PathData="{StaticResource pr0_downVote}" PathHeight="16" PathMargin="2,2,2,2"/>
+                                        </Grid>
+                                        <Grid Grid.Column="2" VerticalAlignment="Center">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" x:Name="LabelVotes" Text="ERR0R" Foreground="{StaticResource pr0_textColor}" FontSize="20"/>
+                                            <TextBlock Grid.Row="1" x:Name="LabelVotesUp" Text="ERR0R" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="10"/>
+                                            <TextBlock Grid.Row="2" x:Name="LabelVotesDown" Text="ERR0R" Foreground="{StaticResource pr0_textColorGreyed}" FontSize="10" Margin="0, -5, 0, 0"/>
+                                        </Grid>
+                                        <uc:Pr0Button x:Name="btnFavItem" Grid.Column="3" Height="20" Width="20" PathData="{StaticResource pr0_heart}" PathHeight="14" PathMargin="2,2,2,2"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Margin="5, 0, 0, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <uc:Pr0Button Grid.Column="0" x:Name="AuthorButton" Text="{StaticResource str_default}" Margin="0" Padding="0" Background="Transparent" Foreground="{StaticResource pr0_textColor}" Click="AuthorButton_Click"/>
+                                        <Ellipse Grid.Column="1" x:Name="AuthorRank" Width="5" Height="5" Fill="White" Margin="5,0,5,0"/>
+                                    </Grid>
+                                </Grid>
+                                <ScrollViewer Grid.Column="1" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" Width="Auto" HorizontalAlignment="Stretch">
+                                    <VariableSizedWrapGrid x:Name="TagList" Orientation="Horizontal" HorizontalAlignment="Stretch" Width="Auto" ItemWidth="10" MaximumRowsOrColumns="100"/>
+                                </ScrollViewer>
+                            </Grid>
+                            <Grid Margin="32, 0, 32, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBox  Grid.Row="0" MinHeight="64" AcceptsReturn="True" Style="{StaticResource pr0TextBox}" PlaceholderText="{StaticResource pr0_placeholder_WriteComment}"/>
+                                <uc:Pr0Button Text="{StaticResource str_Send}" Grid.Row="1" Background="{StaticResource pr0_orange}" Margin="0, 15, 0, 0"/>
+                            </Grid>
+                            <StackPanel x:Name="CommentsStackPanel"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+                <uc:Pr0Button x:Name="BackButton" Grid.Row="1" PathData="{StaticResource pr0_backnav}" PathHeight="16" PathMargin="0,0,0,0" Padding="5" Text="{StaticResource str_Back}" Click="BackButton_Click" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

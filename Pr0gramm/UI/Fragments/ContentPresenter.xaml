@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="Pr0gramm.UI.Fragments.ContentPresenter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:Pr0gramm.UI.Fragments"
+    mc:Ignorable="d">
+    <Grid>
+        <Border Background="{StaticResource pr0_grey}">
+            <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto" ViewChanged="ScrollViewer_ViewChanged">
+                <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Center" Margin="32,0,32,0" x:Name="Presenter" ItemWidth="133" ItemHeight="131"/>
+            </ScrollViewer>
+        </Border>
+        <Frame x:Name="Overlay" Visibility="Collapsed"/>
+    </Grid>
+</Page>
