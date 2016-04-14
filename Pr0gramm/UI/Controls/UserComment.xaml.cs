@@ -1,4 +1,5 @@
-﻿using Pr0gramm.API;
+﻿using System;
+using Pr0gramm.API;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -14,6 +15,7 @@ namespace Pr0gramm.UI.Controls
         {
             this.InitializeComponent();
             this.CommentInfo = comment;
+            this.CommentElement.CustomHandlers.Add(CommentElementAnnotateHandler);
             this.CommentElement.Text = comment.Content;
             this.AuthorButton.Text = comment.Author;
             foreach (var it in comment.Children)
@@ -21,9 +23,31 @@ namespace Pr0gramm.UI.Controls
                 this.ChildrensStack.Children.Add(new UserComment(it));
             }
 
+            this.CommentElement.LinkClicked += CommentElement_LinkClicked;
+
             this.isOpElement.Visibility = comment.Author == comment.Owner.Owner.User ? Visibility.Visible : Visibility.Collapsed;
             this.AuthorRank.Fill = new API.ProfileUtil.Mark((int)comment.Mark).Color;
             this.Created.Text = comment.Created.ToString();
+        }
+
+        private void CommentElement_LinkClicked(object sender, SelectableRichTextBlock.LinkClickedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private SelectableRichTextBlock.CustomHandlersReturn CommentElementAnnotateHandler(string content, int lastIndex)
+        {
+            int startIndex = content.IndexOf('@');
+            if(startIndex > 0)
+            {
+                int endIndex = content.IndexOfAny(SelectableRichTextBlock.HandleTerminateCharacters, startIndex);
+                string userNameAnnotation = content.Substring(startIndex, endIndex - startIndex);
+                return new SelectableRichTextBlock.CustomHandlersReturn(startIndex, endIndex, app.Settings.Instance.APIProvider.Base + "user/" + userNameAnnotation.Substring(1), userNameAnnotation);
+            }
+            else
+            {
+                return new SelectableRichTextBlock.CustomHandlersReturn(startIndex);
+            }
         }
 
         private void CommentElement_TextChanged(object sender, TextChangedEventArgs e)
