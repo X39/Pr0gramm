@@ -246,3 +246,6 @@ paket-files/
 
 # vs-specific files 
 *.pfx
+
+# openpr0gramm repository (submodule)
+OpenPr0gramm/
