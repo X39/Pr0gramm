@@ -4,12 +4,12 @@ namespace Pr0gramm.API.ProfileUtil
     public class Badge
     {
 
-        public Badge(asapJson.JsonNode sourceNode)
+        public Badge(OpenPr0gramm.ProfileBadge sourceNode)
         {
-            this.Link = sourceNode.getValue_Object()["link"].getValue_String();
-            this.Image = sourceNode.getValue_Object()["image"].getValue_String();
-            this.Description = sourceNode.getValue_Object()["description"].getValue_String();
-            this.Created = ApiProvider.UnixTimestamp0.AddSeconds(sourceNode.getValue_Object()["created"].getValue_Number());
+            this.Link = sourceNode.Link;
+            this.Image = sourceNode.Image;
+            this.Description = sourceNode.Description;
+            this.Created = sourceNode.CreatedAt;
         }
 
         public DateTime Created { get; private set; }

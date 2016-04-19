@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Pr0gramm.UI.Controls;
+using Pr0gramm.API;
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Pr0gramm.UI.Fragments
@@ -29,7 +30,7 @@ namespace Pr0gramm.UI.Fragments
                 this.Source = (API.ItemsGetterUtil.Image)e.Parameter;
                 this.Info = await API.ItemInfo.Fetch(this.Source, app.Settings.Instance.APIProvider);
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                bi.UriSource = new Uri(app.Settings.Instance.APIProvider.Image + this.Source.ImagePath, UriKind.Absolute);
+                bi.UriSource = new Uri(ApiProvider.Image + this.Source.ImagePath, UriKind.Absolute);
                 this.CurrentImage.Source = bi;
 
                 foreach(var it in this.Info.Tags)
@@ -51,7 +52,7 @@ namespace Pr0gramm.UI.Fragments
 
                 foreach (var it in this.Info.Comments)
                 {
-                    this.CommentsStackPanel.Children.Add(new Controls.UserComment(it));
+                    this.CommentsStackPanel.Children.Add(new UserComment(it));
                 }
             }
             else

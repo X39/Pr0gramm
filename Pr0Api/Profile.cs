@@ -1,67 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using asapJson;
 using Pr0gramm.API.ProfileUtil;
 using Pr0gramm.API.Util;
-using System.Net;
 
 namespace Pr0gramm.API
 {
     public class Profile
     {
-        private Profile(JsonNode node)
+        private Profile(OpenPr0gramm.GetProfileInfoResponse node)
         {
-            JsonNode tmpNode;
-            tmpNode = node.getValue_Object()["user"];
-            this.UserID = (long)tmpNode.getValue_Object()["id"].getValue_Number();
-            this.Username = tmpNode.getValue_Object()["name"].getValue_String();
-            this.Registered = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Object()["registered"].getValue_Number());
-            this.Score = (long)tmpNode.getValue_Object()["score"].getValue_Number();
-            this.MarkObj = new API.ProfileUtil.Mark((int)tmpNode.getValue_Object()["mark"].getValue_Number());
-            this.IsAdmin = tmpNode.getValue_Object()["admin"].getValue_Number() > 0;
-            this.IsBanned = tmpNode.getValue_Object()["banned"].getValue_Number() > 0;
-            this.CommentCount = (long)node.getValue_Object()["commentCount"].getValue_Number();
-            this.LikesArePublic = node.getValue_Object()["likesArePublic"].getValue_Boolean();
-            this.LikeCount = (long)node.getValue_Object()["likeCount"].getValue_Number();
-            this.TagCount = (long)node.getValue_Object()["tagCount"].getValue_Number();
-            int followCount;
-            if (int.TryParse(node.getValue_Object()["followCount"].getValue_String(), out followCount))
-                this.FollowCount = followCount;
-            else
-                this.FollowCount = 0;
-            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(node.getValue_Object()["ts"].getValue_Number());
-            this.Following = node.getValue_Object()["following"].getValue_Boolean();
-            //this.Cache = node.getValue_Object()["cache"];
-            this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
-            this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();
+            this.UserID = (long)node.User.Id;
+            this.Username = node.User.Name;
+            this.Registered = node.User.RegisteredSince;
+            this.Score = (long)node.User.Score;
+            this.MarkObj = new Mark((int)node.User.Mark);
+            this.IsAdmin = node.User.IsAdmin;
+            this.IsBanned = node.User.IsBanned;
+            this.CommentCount = (long)node.CommentCount;
+            this.LikesArePublic = node.LikesArePublic;
+            this.LikeCount = (long)node.LikeCount;
+            this.TagCount = (long)node.TagCount;
+            int followCount = node.FollowCount;
+            this.Timestamp = node.TS;
+            this.Following = node.IsFollowing;
+            //this.Cache = node.Cache;
+            this.Rt = (long)node.RT;
+            this.Qc = (long)node.QC;
+            this.BannedUntil = node.User.BannedUntil;
 
-            if (tmpNode.getValue_Object().ContainsKey("bannedUntil") && tmpNode.getValue_Object()["bannedUntil"].Type != JsonNode.EJType.Object)
-                this.BannedUntil = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Number());
-
-            tmpNode = node.getValue_Object()["comments"];
             this.Comments = new List<Message>();
-            foreach (var it in tmpNode.getValue_Array())
+            foreach (var it in node.Comments)
             {
                 this.Comments.Add(new Message(it));
             }
 
-            tmpNode = node.getValue_Object()["uploads"];
             this.Uploads = new List<ImgLink>();
-            foreach (var it in tmpNode.getValue_Array())
+            foreach (var it in node.Uploads)
             {
                 this.Uploads.Add(new ImgLink(it));
             }
 
-            tmpNode = node.getValue_Object()["badges"];
             this.Badges = new List<Badge>();
-            foreach (var it in tmpNode.getValue_Array())
+            foreach (var it in node.Badges)
             {
                 this.Badges.Add(new Badge(it));
             }
-            tmpNode = node.getValue_Object()["likes"];
+            
             this.Likes = new List<ImgLink>();
-            foreach (var it in tmpNode.getValue_Array())
+            foreach (var it in node.Likes)
             {
                 this.Likes.Add(new ImgLink(it));
             }
@@ -91,12 +78,8 @@ namespace Pr0gramm.API
 
         public static async Task<Profile> Fetch(string profileName, ApiProvider apiProvider)
         {
-            string url = apiProvider.Api;
-            url += "profile/info?name=" + WebUtility.UrlEncode(profileName);
-            var response = await apiProvider.Client.GetAsync(new Uri(url));
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
-            response.Dispose();
-            return new Profile(responseNode);
+            var response = await apiProvider.bridge.Client.Profile.GetInfo(profileName, OpenPr0gramm.ItemFlags.All);
+            return new Profile(response);
         }
     }
 }

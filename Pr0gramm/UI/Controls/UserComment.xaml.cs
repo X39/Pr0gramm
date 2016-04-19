@@ -42,7 +42,7 @@ namespace Pr0gramm.UI.Controls
             {
                 int endIndex = content.IndexOfAny(SelectableRichTextBlock.HandleTerminateCharacters, startIndex);
                 string userNameAnnotation = content.Substring(startIndex, endIndex - startIndex);
-                return new SelectableRichTextBlock.CustomHandlersReturn(startIndex, endIndex, app.Settings.Instance.APIProvider.Base + "user/" + userNameAnnotation.Substring(1), userNameAnnotation);
+                return new SelectableRichTextBlock.CustomHandlersReturn(startIndex, endIndex, ApiProvider.Base + "user/" + userNameAnnotation.Substring(1), userNameAnnotation);
             }
             else
             {

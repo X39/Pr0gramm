@@ -10,20 +10,20 @@ namespace Pr0gramm.API
     public class ItemsGetter
     {
 
-        private ItemsGetter(asapJson.JsonNode node, ViewSource vs, ApiProvider apiProvider)
+        private ItemsGetter(OpenPr0gramm.GetItemsResponse node, ViewSource vs, ApiProvider apiProvider)
         {
             this.View = vs;
-            this.AtEnd = node.getValue_Object()["atEnd"].getValue_Boolean();
-            this.AtStart = node.getValue_Object()["atStart"].getValue_Boolean();
+            this.AtEnd = node.AtEnd;
+            this.AtStart = node.AtStart;
             this.Items = new List<Image>();
-            foreach(var it in node.getValue_Object()["items"].getValue_Array())
+            foreach(var it in node.Items)
             {
                 this.Items.Add(new Image(it));
             }
-            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(node.getValue_Object()["ts"].getValue_Number());
-            this.Cache = node.getValue_Object()["cache"].getValue_String();
-            this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
-            this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();
+            this.Timestamp = node.TS;
+            this.Cache = node.Cache.ToString();
+            this.Rt = (long)node.RT;
+            this.Qc = (long)node.QC;
             this.Provider = apiProvider;
         }
 
@@ -44,14 +44,11 @@ namespace Pr0gramm.API
             {
                 return new List<Image>();
             }
-            string fetchUrl = this.Provider.Api + this.View.RequestPath + "&newer=" + this.Items.First().Id;
-            var response = await Provider.Client.GetAsync(new Uri(fetchUrl));
+            var response = await Provider.bridge.Client.Item.GetItemsNewer(OpenPr0gramm.ItemFlags.SFW, OpenPr0gramm.ItemStatus.New,false, null, null, null,false, (int)this.Items.First().Id);
 
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
-            response.Dispose();
-            this.AtStart = responseNode.getValue_Object()["atStart"].getValue_Boolean();
+            this.AtStart = response.AtStart;
             var newItems = new List<Image>();
-            foreach (var it in responseNode.getValue_Object()["items"].getValue_Array())
+            foreach (var it in response.Items)
             {
                 newItems.Add(new Image(it));
             }
@@ -64,14 +61,13 @@ namespace Pr0gramm.API
             {
                 return new List<Image>();
             }
-            string fetchUrl = this.Provider.Api + this.View.RequestPath + "&older=" + this.Items.Last().Id;
-            var response = await Provider.Client.GetAsync(new Uri(fetchUrl));
 
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
-            response.Dispose();
-            this.AtEnd = responseNode.getValue_Object()["atEnd"].getValue_Boolean();
+            //OpenPr0gramm.ItemFlags.SFW, OpenPr0gramm.ItemStatus.New, false, null, false, (int)this.Items.Last().Id
+            var response = await Provider.bridge.Client.Item.GetItemsOlder(OpenPr0gramm.ItemFlags.SFW, OpenPr0gramm.ItemStatus.New, false, null, null, null, false, (int)this.Items.Last().Id);
+
+            this.AtEnd = response.AtEnd;
             var newItems = new List<Image>();
-            foreach (var it in responseNode.getValue_Object()["items"].getValue_Array())
+            foreach (var it in response.Items)
             {
                 newItems.Add(new Image(it));
             }
@@ -81,12 +77,11 @@ namespace Pr0gramm.API
 
         public static async Task<ItemsGetter> Fetch(ApiProvider apiProvider, ViewSource vs)
         {
-            string fetchUrl = apiProvider.Api + vs.RequestPath;
-            var response = await apiProvider.Client.GetAsync(new Uri(fetchUrl));
+            string fetchUrl = ApiProvider.Api + vs.RequestPath;
+            var response = await apiProvider.bridge.Client.Item.GetItems(OpenPr0gramm.ItemFlags.SFW, OpenPr0gramm.ItemStatus.New);
+            //var response = await apiProvider.Client.GetAsync(new Uri(fetchUrl));
 
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
-            response.Dispose();
-            return new ItemsGetter(responseNode, vs, apiProvider);
+            return new ItemsGetter(response, vs, apiProvider);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using asapJson;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text;
@@ -15,17 +14,17 @@ namespace Pr0gramm.API
         public string _nonce { get { return this.UserID.Substring(0, 16); } }
         public bool Paid { get; private set; }
 
-        public long qc { get; private set; }
-        public long rt { get; private set; }
+        //public long qc { get; private set; }
+        // long rt { get; private set; }
 
-        private User(JsonNode node, Windows.Web.Http.HttpCookie cookie)
+        private User(OpenPr0gramm.User node, CookieContainer cookie)
         {
-            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(node.getValue_Object()["ts"].getValue_Number());
-            this.rt = (long)node.getValue_Object()["rt"].getValue_Number();
-            this.qc = (long)node.getValue_Object()["qc"].getValue_Number();
-            bool flag = false;
-            string tmp = "";
-            string output = "";
+            this.Timestamp = node.RegisteredSince;
+            //this.rt = (long)0;// ?
+            //this.qc = (long)0;// ?
+
+// needs commenting: what does it do? v
+/*
             foreach (var c in cookie.Value)
             {
                 if (flag)
@@ -62,12 +61,15 @@ namespace Pr0gramm.API
                 }
             }
             output += ((char)Convert.ToInt32(tmp, 16));
-            JsonNode cookieContent = new JsonNode(output, true);
-            this.Username = cookieContent.getValue_Object()["n"].getValue_String();
-            this.UserID = cookieContent.getValue_Object()["id"].getValue_String();
+*/
+// needs commenting: what does it do? ^
+
+            this.Username = node.Name;
+            this.UserID = node.Id+"";
+
             //this.Unknown = (long)cookieContent.getValue_Object()["a"].getValue_Number();
             //this.Unknown = (long)cookieContent.getValue_Object()["pp"].getValue_Number();
-            this.Paid = cookieContent.getValue_Object()["paid"].getValue_Boolean();
+            this.Paid = false;
         }
 
         /// <summary>
@@ -81,46 +83,30 @@ namespace Pr0gramm.API
         /// <returns></returns>
         public static async Task<User> Login(string username, string password, ApiProvider apiProvider)
         {
-            StringBuilder postDataBuilder = new StringBuilder();
-            postDataBuilder.Append("name=" + WebUtility.UrlEncode(username));
-            postDataBuilder.Append("&password=" + WebUtility.UrlEncode(password));
-            
-            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/login"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString(), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/x-www-form-urlencoded"));
-            var responseNode = new JsonNode(response.Content.ToString(), true);
-            response.Dispose();
-            if (responseNode.getValue_Object().ContainsKey("error"))
+            var response = await apiProvider.bridge.Client.User.LogIn(username, password);
+            if (!response.Success)
             {
-                switch (responseNode.getValue_Object()["error"].getValue_String())
+                if(response.Ban != null && response.Ban.IsBanned)
                 {
-                    case "limitReached":
-                        throw new Exceptions.RateLimitReached();
+                    throw new Exception($"Du bist bis {response.Ban.Until} gebannt. Warum? \"{response.Ban.Reason}\".");
                 }
-                throw new Exception(responseNode.getValue_Object()["error"].getValue_String());
+                else
+                {
+                    throw new Exception("Das Passwort war wohl falsch oder so.");
+                }
+                //                throw new Exceptions.RateLimitReached();
+                //                throw new Exception(response.);
             }
-            if (responseNode.getValue_Object()["success"].getValue_Boolean())
-            {
-                return new User(responseNode, apiProvider.Cookie);
-            }
-            else
-            {
-                return null;
-            }
+            return new User(new OpenPr0gramm.User(), apiProvider.bridge.Client.GetCookies());
         }
-        public static User LoadFromCookie(Windows.Web.Http.HttpCookie cookie)
+        public static User LoadFromCookie(CookieContainer cookie)
         {
-            JsonNode node = new JsonNode(new System.Collections.Generic.Dictionary<string, JsonNode>());
-            node.getValue_Object()["ts"] = new JsonNode((DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
-            node.getValue_Object()["rt"] = new JsonNode(0);
-            node.getValue_Object()["qc"] = new JsonNode(0);
-            return new User(node, cookie);
+            ApiBridge.Instance.Client = new OpenPr0gramm.Pr0grammClient(cookie);
+            return new User(new OpenPr0gramm.User(), cookie);
         }
         public async void Logout(ApiProvider apiProvider)
         {
-            StringBuilder postDataBuilder = new StringBuilder();
-            postDataBuilder.Append("id=" + WebUtility.UrlEncode(this.UserID));
-            postDataBuilder.Append("&_nonce=" + WebUtility.UrlEncode(this._nonce));
-            var response = await apiProvider.Client.PostAsync(new Uri(apiProvider.Api + "user/logout"), new Windows.Web.Http.HttpStringContent(postDataBuilder.ToString(), Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/x-www-form-urlencoded"));
-            response.Dispose();
+           var response = await apiProvider.bridge.Client.User.LogOut();
         }
 
     }

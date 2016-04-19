@@ -17,81 +17,31 @@ namespace Pr0gramm.API.Util
         public string Thumb { get; private set; }
         public long ItemId { get; private set; }
 
-        public Message(asapJson.JsonNode souceNode)
+        public Message(object souceNode)
         {
-            //api call profile/info has a bug for messages which causes all numbers to be strings ...
-            //that is why this weirdo casting has to happen for the generic message object
+            OpenPr0gramm.Item _node = (OpenPr0gramm.Item)souceNode;
+            this.Id = _node.Id;
+            this.Up = _node.Upvotes;
+            this.Down = _node.Downvotes;
+            this.Content = _node.ToString();
+            this.Created = _node.CreatedAt;
 
-            asapJson.JsonNode tmpNode;
-            double tmpVal;
+            if (souceNode.GetType() == typeof(OpenPr0gramm.ItemComment))
+            {
+                OpenPr0gramm.ItemComment node = (OpenPr0gramm.ItemComment)souceNode;
 
-            tmpNode = souceNode.getValue_Object()["id"];
-            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
-                this.Id = (long)tmpNode.getValue_Number();
-            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
-            {
-                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
-                    this.Id = (long)tmpVal;
-                else
-                    this.Id = -1;
+                this.Parent = node.ParentId;
+                this.Confidence = (long)node.Confidence;
+                this.Author = node.Name;
+                this.Mark = (long)node.Mark;
             }
-            tmpNode = souceNode.getValue_Object()["up"];
-            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
-                this.Up = (long)tmpNode.getValue_Number();
-            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
+            if (souceNode.GetType() == typeof(OpenPr0gramm.ProfileComment))
             {
-                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
-                    this.Up = (long)tmpVal;
-                else
-                    this.Up = -1;
-            }
-            tmpNode = souceNode.getValue_Object()["down"];
-            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
-                this.Down = (long)tmpNode.getValue_Number();
-            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
-            {
-                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
-                    this.Down = (long)tmpVal;
-                else
-                    this.Down = -1;
-            }
-            this.Content = souceNode.getValue_Object()["content"].getValue_String();
-            tmpNode = souceNode.getValue_Object()["created"];
-            if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
-                this.Created = ApiProvider.UnixTimestamp0.AddSeconds(tmpNode.getValue_Number());
-            else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
-            {
-                if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
-                    this.Created = ApiProvider.UnixTimestamp0.AddSeconds(tmpVal);
-                else
-                    this.Created = ApiProvider.UnixTimestamp0;
-            }
+                OpenPr0gramm.ProfileComment node = (OpenPr0gramm.ProfileComment)souceNode;
+                this.Thumb = node.ThumbnailUrl;
+                this.ItemId = (long)node.ItemId;
+            } 
 
-            //Only for ItemInfo messages
-            this.Parent = souceNode.getValue_Object().ContainsKey("parent") ? (long)souceNode.getValue_Object()["parent"].getValue_Number() : 0;
-            this.Confidence = souceNode.getValue_Object().ContainsKey("confidence") ? (long)souceNode.getValue_Object()["confidence"].getValue_Number() : 0;
-            this.Author = souceNode.getValue_Object().ContainsKey("name") ? souceNode.getValue_Object()["name"].getValue_String() : "";
-            this.Mark = souceNode.getValue_Object().ContainsKey("mark") ? (long)souceNode.getValue_Object()["mark"].getValue_Number() : 0;
-
-            //Only for Profile messages
-            this.Thumb = souceNode.getValue_Object().ContainsKey("thumb") ? souceNode.getValue_Object()["thumb"].getValue_String() : "";
-            if(souceNode.getValue_Object().ContainsKey("itemId"))
-            {
-                tmpNode = souceNode.getValue_Object()["itemId"];
-                if (tmpNode.Type == asapJson.JsonNode.EJType.Number)
-                    this.ItemId = (long)tmpNode.getValue_Number();
-                else if (tmpNode.Type == asapJson.JsonNode.EJType.String)
-                {
-                    if (double.TryParse(tmpNode.getValue_String(), out tmpVal))
-                        this.ItemId = (long)tmpVal;
-                    else
-                        this.ItemId = -1;
-                }
-            }
-            else
-            {
-                this.ItemId = 0;
-            }
         }
     }
 }

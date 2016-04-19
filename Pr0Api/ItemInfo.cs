@@ -12,16 +12,16 @@ namespace Pr0gramm.API
             public long Confidence { get; private set; }
             public string Text { get; private set; }
 
-            public Tag(asapJson.JsonNode sourceNode)
+            public Tag(OpenPr0gramm.Tag sourceNode)
             {
-                this.Id = (long)sourceNode.getValue_Object()["id"].getValue_Number();
-                this.Confidence = (long)sourceNode.getValue_Object()["confidence"].getValue_Number();
-                this.Text = sourceNode.getValue_Object()["tag"].getValue_String();
+                this.Id = sourceNode.Id;
+                this.Confidence = (long)sourceNode.Confidence;
+                this.Text = sourceNode.Content;
             }
         }
         public class Comment
         {
-            private API.Util.Message _msg;
+            private Util.Message _msg;
             public List<Comment> Children { get; private set; }
             public string Content { get { return _msg.Content; } }
             public long Confidence { get { return _msg.Confidence; } }
@@ -34,9 +34,9 @@ namespace Pr0gramm.API
             public long Up { get { return _msg.Up; } }
             public ItemInfo Owner { get; private set; }
 
-            public Comment(asapJson.JsonNode souceNode, ItemInfo owner)
+            public Comment(OpenPr0gramm.Comment souceNode, ItemInfo owner)
             {
-                this._msg = new Util.Message(souceNode);
+                this._msg = new Util.Message(souceNode as OpenPr0gramm.ItemComment);
                 this.Children = new List<Comment>();
                 this.Owner = owner;
             }
@@ -49,17 +49,17 @@ namespace Pr0gramm.API
         public long Qc { get; private set; }
         public ItemsGetterUtil.Image Owner { get; private set; }
 
-        private ItemInfo(asapJson.JsonNode sourceNode, ItemsGetterUtil.Image owner)
+        private ItemInfo(OpenPr0gramm.GetItemsInfoResponse sourceNode, ItemsGetterUtil.Image owner)
         {
             this.Tags = new List<Tag>();
-            foreach (var node in sourceNode.getValue_Object()["tags"].getValue_Array())
+            foreach (var node in sourceNode.Tags)
             {
                 this.Tags.Add(new Tag(node));
             }
 
             this.Comments = new List<Comment>();
             var tmpComments = new List<Comment>();
-            foreach (var node in sourceNode.getValue_Object()["comments"].getValue_Array())
+            foreach (var node in sourceNode.Comments)
             {
                 tmpComments.Add(new Comment(node, this));
             }
@@ -75,23 +75,18 @@ namespace Pr0gramm.API
                 }
             }
 
-            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(sourceNode.getValue_Object()["ts"].getValue_Number());
-            this.Cache = sourceNode.getValue_Object()["cache"].getValue_String();
-            this.Rt = (long)sourceNode.getValue_Object()["rt"].getValue_Number();
-            this.Qc = (long)sourceNode.getValue_Object()["qc"].getValue_Number();
+            this.Timestamp = sourceNode.TS;
+            this.Cache = sourceNode.Cache.ToString();
+            this.Rt = (long)sourceNode.RT;
+            this.Qc = (long)sourceNode.QC;
 
             this.Owner = owner;
         }
         public static async Task<ItemInfo> Fetch(ItemsGetterUtil.Image img, ApiProvider apiProvider)
         {
-            string url = apiProvider.Api;
-            url += "items/info?itemId=" + img.Id;
+            var response = await apiProvider.bridge.Client.Item.GetInfo((int)img.Id);
 
-            var response = await apiProvider.Client.GetAsync(new Uri(url));
-
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
-            response.Dispose();
-            return new ItemInfo(responseNode, img);
+            return new ItemInfo(response, img);
         }
     }
 }

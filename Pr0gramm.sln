@@ -4,10 +4,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pr0gramm", "Pr0gramm\Pr0gramm.csproj", "{F28C97C8-F300-4B74-B960-DA64B99AE1D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2253CE81-8EFC-485F-90BA-471EA93E2527} = {2253CE81-8EFC-485F-90BA-471EA93E2527}
+		{9FE1F4AC-78B6-4151-B0D9-DB67B6A3CAEB} = {9FE1F4AC-78B6-4151-B0D9-DB67B6A3CAEB}
+		{54B0A7E0-0953-497E-88D8-8A9D9AC551D6} = {54B0A7E0-0953-497E-88D8-8A9D9AC551D6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Background", "Background\Background.csproj", "{9FE1F4AC-78B6-4151-B0D9-DB67B6A3CAEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pr0Api", "Pr0Api\Pr0Api.csproj", "{54B0A7E0-0953-497E-88D8-8A9D9AC551D6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FE1F4AC-78B6-4151-B0D9-DB67B6A3CAEB} = {9FE1F4AC-78B6-4151-B0D9-DB67B6A3CAEB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenPr0gramm.UWP", "OpenPr0gramm\OpenPr0gramm\OpenPr0gramm.UWP.csproj", "{2253CE81-8EFC-485F-90BA-471EA93E2527}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +32,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F28C97C8-F300-4B74-B960-DA64B99AE1D1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F28C97C8-F300-4B74-B960-DA64B99AE1D1}.Debug|Any CPU.Build.0 = Debug|x86
+		{F28C97C8-F300-4B74-B960-DA64B99AE1D1}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{F28C97C8-F300-4B74-B960-DA64B99AE1D1}.Debug|ARM.ActiveCfg = Debug|ARM
 		{F28C97C8-F300-4B74-B960-DA64B99AE1D1}.Debug|ARM.Build.0 = Debug|ARM
 		{F28C97C8-F300-4B74-B960-DA64B99AE1D1}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -73,6 +85,22 @@ Global
 		{54B0A7E0-0953-497E-88D8-8A9D9AC551D6}.Release|x64.Build.0 = Release|x64
 		{54B0A7E0-0953-497E-88D8-8A9D9AC551D6}.Release|x86.ActiveCfg = Release|x86
 		{54B0A7E0-0953-497E-88D8-8A9D9AC551D6}.Release|x86.Build.0 = Release|x86
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|ARM.Build.0 = Debug|ARM
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|x64.ActiveCfg = Debug|x64
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|x64.Build.0 = Debug|x64
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|x86.ActiveCfg = Debug|x86
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Debug|x86.Build.0 = Debug|x86
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|ARM.ActiveCfg = Release|ARM
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|ARM.Build.0 = Release|ARM
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|x64.ActiveCfg = Release|x64
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|x64.Build.0 = Release|x64
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|x86.ActiveCfg = Release|x86
+		{2253CE81-8EFC-485F-90BA-471EA93E2527}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Net;
 
 namespace Pr0gramm.API.UserUtil
 {
     public class Sync
     {
-        private Sync(asapJson.JsonNode node)
+        private Sync(OpenPr0gramm.GetMessagesResponse<OpenPr0gramm.InboxItem> node)
         {
-            this.InboxCount = (int)node.getValue_Object()["inboxCount"].getValue_Number();
+            this.InboxCount = (int)node.Messages.Count;
             this.Log = new List<int>();
-            foreach(var it in node.getValue_Object()["log"].getValue_Array())
+            foreach(var it in node.Messages)
             {
-                this.Log.Add((int)it.getValue_Number());
+                this.Log.Add((int)it.Id);
             }
-            this.LastId = (int)node.getValue_Object()["lastId"].getValue_Number();
-            this.Timestamp = ApiProvider.UnixTimestamp0.AddSeconds(node.getValue_Object()["ts"].getValue_Number());
-            //this.Cache = node.getValue_Object()["cache"];
-            this.Rt = (long)node.getValue_Object()["rt"].getValue_Number();
-            this.Qc = (long)node.getValue_Object()["qc"].getValue_Number();
+            this.LastId = (int)node.Messages.Last().Id;
+            this.Timestamp = node.TS;
+            //this.Cache = node.Cache;
+            this.Rt = (long)node.RT;
+            this.Qc = (long)node.QC;
         }
 
         public int InboxCount { get; private set; }
@@ -33,12 +31,8 @@ namespace Pr0gramm.API.UserUtil
 
         public static async Task<Sync> Fetch(ApiProvider apiProvider, DateTime? lastSync = null)
         {
-            string url = apiProvider.Api;
-            url += "user/sync?lastId=" + (lastSync.HasValue ? lastSync.Value.Subtract(ApiProvider.UnixTimestamp0).TotalSeconds : 0);
-            var response = await apiProvider.Client.GetAsync(new Uri(url));
-            asapJson.JsonNode responseNode = new asapJson.JsonNode(await response.Content.ReadAsStringAsync(), true);
-            response.Dispose();
-            return new Sync(responseNode);
+            var response = await apiProvider.bridge.Client.Inbox.GetAllMessages();
+            return new Sync(response);
         }
     }
 }

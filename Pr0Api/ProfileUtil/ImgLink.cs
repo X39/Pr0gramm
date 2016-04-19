@@ -1,14 +1,25 @@
-﻿using System;
-using System.Threading;
-namespace Pr0gramm.API.ProfileUtil
+﻿namespace Pr0gramm.API.ProfileUtil
 {
     public class ImgLink
     {
 
-        public ImgLink(asapJson.JsonNode sourceNode)
+        public ImgLink(object sourceNode)
         {
-            this.ID = sourceNode.getValue_Object()["id"].getValue_String();
-            this.Thumb = sourceNode.getValue_Object()["thumb"].getValue_String();
+            if (sourceNode.GetType() == typeof(OpenPr0gramm.ProfileUpload))
+            {
+                var node = (OpenPr0gramm.ProfileUpload)sourceNode;
+                this.ID = node.Id + "";
+                this.Thumb = node.ThumbnailUrl;
+
+            }
+            if (sourceNode.GetType() == typeof(OpenPr0gramm.LikedItem))
+            {
+                var node = (OpenPr0gramm.LikedItem)sourceNode;
+                this.ID = node.Id + "";
+                this.Thumb = node.ThumbnailUrl;
+
+            }
+
         }
 
         public string ID { get; private set; }

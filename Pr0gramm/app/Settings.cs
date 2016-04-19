@@ -1,4 +1,6 @@
 ﻿using Pr0gramm.API;
+using System;
+using System.Net;
 using Windows.Web.Http;
 
 namespace Pr0gramm.app
@@ -28,12 +30,12 @@ namespace Pr0gramm.app
             set
             {
                 Windows.Storage.ApplicationData.Current.LocalSettings.Values["UseHttps"] = value;
-                APIProvider.UseHttps = value;
+                ApiProvider.UseHttps = value;
             }
         }
 
-        private HttpCookie _StoredCookie = null;
-        public HttpCookie StoredCookie
+        private CookieContainer _StoredCookie = null;
+        public CookieContainer StoredCookie
         {
             get
             {
@@ -42,12 +44,18 @@ namespace Pr0gramm.app
                     var val = Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"];
                     if (val == null)
                         return null;
-                    this._StoredCookie = new HttpCookie("me", this.APIProvider.Base, "");
-                    this._StoredCookie.Value = (string)val;
+                    this._StoredCookie = new CookieContainer();
+                    Cookie c = new Cookie();
+                    c.Value = (string)val;
+                    //this._StoredCookie.Add(new Uri(ApiProvider.Base,UriKind.Absolute),c);
                 }
                 return this._StoredCookie;
             }
-            set { this._StoredCookie = value; Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = value == null ? null : value.Value; }
+            set {
+                this._StoredCookie = value;
+                var me = this._StoredCookie.GetCookies(new Uri(ApiProvider.Base))["me"];
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["Cookie"] = me == null ? null : me;
+            }
         }
 
         public User Pr0User { get; internal set; }
@@ -60,7 +68,7 @@ namespace Pr0gramm.app
             var cookie = this.StoredCookie;
             if(cookie != null)
             {
-                this.APIProvider.Cookie = cookie;
+                this.APIProvider = new ApiProvider(@"Pr0gramm/UWp/1.0", this.UseHttps, cookie);
             }
 
         }

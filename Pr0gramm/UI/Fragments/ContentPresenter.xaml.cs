@@ -4,9 +4,6 @@ using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System.Net;
-using asapJson;
-using System.Threading.Tasks;
 using Pr0gramm.API;
 
 
@@ -33,7 +30,7 @@ namespace Pr0gramm.UI.Fragments
             if(e.Parameter is API.ItemsGetterUtil.ViewSource)
             {
                 this.Source = (API.ItemsGetterUtil.ViewSource)e.Parameter;
-                this.ApiContent = await API.ItemsGetter.Fetch(app.Settings.Instance.APIProvider, this.Source);
+                this.ApiContent = await ItemsGetter.Fetch(app.Settings.Instance.APIProvider, this.Source);
                 
                 UpdatePresentedContent();
             }
@@ -56,7 +53,7 @@ namespace Pr0gramm.UI.Fragments
                 img.Height = 128;
                 
                 var bi = new Windows.UI.Xaml.Media.Imaging.BitmapImage();
-                bi.UriSource = new Uri(app.Settings.Instance.APIProvider.Thumb + it.Thumb, UriKind.Absolute);
+                bi.UriSource = new Uri(ApiProvider.Thumb + it.Thumb, UriKind.Absolute);
                 img.Source = bi;
                 Button btn = new Button();
 
