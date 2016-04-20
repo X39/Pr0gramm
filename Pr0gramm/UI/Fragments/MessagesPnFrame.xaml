@@ -1,0 +1,83 @@
+﻿<Page
+    x:Class="Pr0gramm.UI.Fragments.MessagesPnFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm.UI.Fragments"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="using:Pr0gramm.UI.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource pr0_lightGrey}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Column="0" x:Name="UserList" Style="{StaticResource pr0ListBox}" Background="{StaticResource pr0_lightGrey}">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource pr0ListBoxItem}"/>
+            </ListBox.Resources>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+            <TextBlock Text="test"/>
+        </ListBox>
+        <Rectangle Grid.Column="1" Fill="{StaticResource pr0_orange}"/>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="1*" MinHeight="40"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="ReceivedMessages" Grid.Row="0" Orientation="Vertical"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Background="{StaticResource pr0_lighterGrey}" x:Name="MessageText" Grid.Column="0" Style="{StaticResource pr0TextBox}"/>
+                <uc:Pr0Button x:Name="MessageCommit" Grid.Column="1" PathData="{StaticResource pr0_rightArrow}" PathHeight="25"  PathMargin="5,5,5,5"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

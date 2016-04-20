@@ -43,6 +43,7 @@ namespace Pr0gramm.UI.Pages
             btnTop.Toggled = false;
             btnSettings.Toggled = false;
             btnUser.Toggled = false;
+            msgButton.Toggled = false;
         }
 
         private void btnNew_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -92,6 +93,13 @@ namespace Pr0gramm.UI.Pages
             {
                 //ToDo: Show Profile Pane
             }
+        }
+
+        private void msgButton_Click(object sender, RoutedEventArgs e)
+        {
+            clearToggleStates();
+            msgButton.Toggled = true;
+            this.ContentFrame.Navigate(typeof(Fragments.MessagesMainFrame));
         }
     }
 }
