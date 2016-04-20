@@ -88,13 +88,13 @@ namespace Pr0gramm.UI.Fragments
             if(sv.VerticalOffset == 0)
             {
                 //Fetch newer
-                if ((await ApiContent.GetNewer()).Count > 0)
+                if ((await ApiContent.GetNewer(app.Settings.Instance.APIProvider)).Count > 0)
                     UpdatePresentedContent();
             }
             else if(sv.ScrollableHeight > 256 && sv.VerticalOffset >= sv.ScrollableHeight - 256)
             {
                 //Fetch older
-                if((await ApiContent.GetOlder()).Count > 0)
+                if((await ApiContent.GetOlder(app.Settings.Instance.APIProvider)).Count > 0)
                     UpdatePresentedContent();
             }
         }
