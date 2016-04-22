@@ -12,14 +12,21 @@
             <Style TargetType="TextBlock">
                 <Setter Property="Foreground" Value="{StaticResource pr0_textColor}"/>
             </Style>
+            <Style TargetType="PivotItem">
+                <Setter Property="Background" Value="{StaticResource pr0_orange}"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
         </Pivot.Resources>
-        <PivotItem Margin="0">
+        <PivotItem>
             <PivotItem.Header>
                 <TextBlock Text="Privat Nachrichten"/>
             </PivotItem.Header>
-            <Frame x:Name="PNFrame" Margin="-10,2,10,-2"/>
+            <Frame x:Name="PNFrame"/>
         </PivotItem>
-        <PivotItem Margin="0">
+        <PivotItem>
             <PivotItem.Header>
                 <TextBlock Text="Kommentare"/>
             </PivotItem.Header>

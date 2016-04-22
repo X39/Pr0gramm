@@ -101,11 +101,26 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="app\TextToast.cs" />
+    <Compile Include="UI\Controls\CommentMessage.xaml.cs">
+      <DependentUpon>CommentMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\PrivateMessage.xaml.cs">
+      <DependentUpon>PrivateMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\SelectableRichTextBlock.xaml.cs">
       <DependentUpon>SelectableRichTextBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Fragments\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Fragments\MessagesMainFrame.xaml.cs">
+      <DependentUpon>MessagesMainFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Fragments\MessageCommentFrame.xaml.cs">
+      <DependentUpon>MessageCommentFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Fragments\MessagesPnFrame.xaml.cs">
+      <DependentUpon>MessagesPnFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Fragments\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -177,11 +192,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="UI\Controls\CommentMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\PrivateMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Controls\SelectableRichTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Fragments\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Fragments\MessagesMainFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Fragments\MessageCommentFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Fragments\MessagesPnFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,6 +264,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Background\Background.csproj">
+      <Project>{9fe1f4ac-78b6-4151-b0d9-db67b6a3caeb}</Project>
+      <Name>Background</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pr0Api\Pr0Api.csproj">
       <Project>{54b0a7e0-0953-497e-88d8-8a9d9ac551d6}</Project>
       <Name>Pr0Api</Name>
