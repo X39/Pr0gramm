@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="Pr0gramm.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pr0gramm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <MenuFlyout x:Key="FilterMenu">
+            <MenuFlyoutItem Text="test"/>
+            <MenuFlyoutItem Text="test2"/>
+        </MenuFlyout>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource scbRealGrey}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource scbMenuBarBlack}">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <Button Content="new" Foreground="{StaticResource scbDefaultFontColor}"/>
+                <Button Content="top" Foreground="{StaticResource scbDefaultFontColor}"/>
+                <Button Content="stelz" Foreground="{StaticResource scbDefaultFontColor}"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="sfw" Foreground="{StaticResource scbDefaultFontColor}" ContextFlyout="{StaticResource FilterMenu}"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
+                
+            </StackPanel>
+        </Grid>
+        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Disabled" VerticalScrollMode="Auto">
+            <VariableSizedWrapGrid Orientation="Horizontal" HorizontalAlignment="Center" Margin="32,0,32,0" x:Name="Presenter" ItemWidth="128" ItemHeight="128"/>
+        </ScrollViewer>
+    </Grid>
+</Page>
